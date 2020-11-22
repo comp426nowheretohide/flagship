@@ -8,7 +8,7 @@
 #spaceship {
     width: 125px;
     height: 50px;
-    background-image: url(Spaceship.png);
+    background-image: url(Spaceship.jpg);
     background-size: 125px 50px;
     position: relative;
     top: 175px;
@@ -17,7 +17,7 @@
 #asteroid {
     width: 125px;
     height: 125px;
-    background-image: url(Asteroid.png);
+    background-image: url(Asteroid.jpg);
     background-size: 125px 125px;
     position: relative;
     top: 100px;
@@ -28,7 +28,7 @@
 #asteroid2 {
     width: 125px;
     height: 125px;
-    background-image: url(Asteroid.png);
+    background-image: url(Asteroid.jpg);
     background-size: 125px 125px;
     position: absolute;
     top: 400px;
