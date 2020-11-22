@@ -19,9 +19,6 @@ $(document).ready(() => {
         }
         $('.asteroid').remove();
     })
-    let buttons = $("#buttons")
-    buttons.append(`<button class="back button">Back to Lobby</button>`)
-    buttons.on("click", ".back", returnToLobby);
 })
 
 const returnToLobby = function() {
@@ -68,3 +65,7 @@ const generateAsteroid = (num) => {
 };
 
 let runGame = setInterval(generateAsteroid, speed + 50);
+
+setTimeout(function() {
+    location.replace("../../VotingAndChat/index.html")
+}, 60000);

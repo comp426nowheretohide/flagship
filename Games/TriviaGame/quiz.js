@@ -528,3 +528,7 @@ function renderQuestions(questions, quiz) {
     $('#customQuiz').append(question.join(''))
 
 }
+
+setTimeout(function() {
+    location.replace("../../VotingAndChat/index.html")
+}, 60000);

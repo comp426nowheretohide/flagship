@@ -215,9 +215,10 @@ const returnToLobby = function() {
     location.replace("../../SpaceshipRooms/index.html")
 }
 
-let buttons = $('#buttons')
-buttons.on("click", ".back", returnToLobby)
-
 $(function() {
     loadIntoDOM();
 });
+
+setTimeout(function() {
+    location.replace("../../VotingAndChat/index.html")
+}, 60000);

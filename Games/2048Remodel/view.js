@@ -59,7 +59,6 @@ const renderBoard = function () {
     })
 
     $root.on("click", ".reset", resetGame)
-    $root.on("click", ".back", returnToLobby)
 
 };
 
@@ -117,7 +116,6 @@ const startNewGame = function () {
 
                 <div class="buttonContainer">
                     <button class="reset button">Reset Game</button>
-                    <button class="back button">Back to Lobby</button>
                 </div>`
 
     return html
@@ -143,3 +141,7 @@ const fillBoard = function () {
         }
     }
 }
+
+setTimeout(function() {
+    location.replace("../../VotingAndChat/index.html")
+}, 60000);
