@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand&display=swap" rel="stylesheet">
+    <title>Voting Phase</title>
+
+</head>
+<!--When we get our webpage all setup we can test if using the gif is fine, the static.png was just for making
+this page as the gif was using a lot of energy-->
+<style>
+    body {
+        background-image: url('static.png');
+        background-size: cover;
+    }
+
+    #square {
+        height: 825px;
+        width: 900px;
+        margin: 50px;
+    }
+
+    .player {
+        width: 418px;
+        height: 64px;
+    }
+
+    #square #chat {
+        position: absolute;
+        bottom: 60px;
+    }
+
+</style>
+
+<body>
+    <section class="hero is-fullheight">
+        <div class="container">
+            <div class="has-background-grey-light box" id="square">
+                <div class="columns is-multiline justify-center"></div>
+            </div>
+    </section>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

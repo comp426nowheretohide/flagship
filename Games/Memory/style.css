@@ -1,0 +1,46 @@
+
+ .card-grid {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    width: 50%;
+    height: 100%;
+    perspective: 1000px;
+    margin: auto;
+}
+
+
+.card-front {
+    width: 200px;
+    height:200px;
+    background-color:lightblue;
+    display:block;
+}
+
+.card-back {
+    width: 200px;
+    height:200px;
+    display:none;
+    vertical-align: text-top;
+}
+
+html {
+    background-image: url('static.png');
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: whitesmoke;
+}
+
+h2{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    color: rgb(148, 148, 148);
+}
+
+

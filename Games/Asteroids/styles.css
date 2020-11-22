@@ -1,0 +1,84 @@
+.game {
+    width: 800px;
+    height: 400px;
+    background-color: black;
+    margin:auto;
+    margin-top: 25px;
+}
+
+.asteroid {
+    background-image: url(Asteroid.png);
+    background-size: 125px 125px;
+    position: relative;
+    top: 100px;
+    left: 675px;
+}
+
+.left {
+    animation: left 1.5s infinite linear;
+}
+
+@keyframes left{
+    0%{
+        left: 675px;
+    }
+    100%{
+        left: -125px;
+        transform: rotate(120deg);
+    }
+}
+
+.right {
+    animation: right 1.5s infinite linear;
+}
+
+@keyframes right{
+    0%{
+        left: -125px;
+    }
+    100%{
+        left: 675px;
+        transform: rotate(120deg);
+    }
+}
+
+.up {
+    animation: up 1.25s linear;
+}
+
+@keyframes up {
+    0%{
+        top: 400px;
+    }
+    100%{
+        top: -200px;
+        transform: rotate(120deg);
+    }
+}
+
+.down {
+    animation: down 1.25s linear;
+}
+
+@keyframes down {
+    0%{
+        top: -200px;
+    }
+    100%{
+        top: 400px;
+        transform: rotate(120deg);
+    }
+}
+
+html {
+    background-image: url('static.png');
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: whitesmoke;
+}
+h2, p{
+    text-align: center;
+}
