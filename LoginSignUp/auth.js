@@ -29,6 +29,7 @@ logInForm.addEventListener('submit', (e) => {
     auth.setPersistence((firebase.auth.Auth.Persistence.SESSION)).then(_ => {
         auth.signInWithEmailAndPassword(email, password).then(cred => {
             logInForm.reset();
+            location.replace('../SpaceshipRooms/index.html')
         });
     })
 })
