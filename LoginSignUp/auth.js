@@ -13,6 +13,7 @@ signUpForm.addEventListener('submit', (e) => {
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
         //clear out the form fields
         signUpForm.reset();
+        location.replace('../SpaceshipRooms/index.html')
     });
 })
 
