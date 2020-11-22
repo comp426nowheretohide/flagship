@@ -33,7 +33,7 @@ logInForm.addEventListener('submit', (e) => {
     })
 })
 
-/*
+
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         console.log("user is signed in!");
@@ -42,6 +42,4 @@ firebase.auth().onAuthStateChanged(function(user) {
         console.log("no user signed in");
     }
   });
-
-*/
 
