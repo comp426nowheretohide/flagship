@@ -19,7 +19,14 @@ $(document).ready(() => {
         }
         $('.asteroid').remove();
     })
+    let buttons = $("#buttons")
+    buttons.append(`<button class="back button">Back to Lobby</button>`)
+    buttons.on("click", ".back", returnToLobby);
 })
+
+const returnToLobby = function() {
+    location.replace("../../SpaceshipRooms/index.html")
+}
 
 const generateAsteroid = (num) => {
     let asteroid = $(`<div class = "asteroid"></div>`);
@@ -57,6 +64,7 @@ const generateAsteroid = (num) => {
     setTimeout(() => {
         asteroid.remove();
     }, speed);
+
 };
 
 let runGame = setInterval(generateAsteroid, speed + 50);

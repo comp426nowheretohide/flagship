@@ -30,6 +30,13 @@ main();
 
 generateFood();
 
+const returnToLobby = function() {
+    location.replace("../../SpaceshipRooms/index.html")
+}
+
+let buttons = $('#buttons')
+buttons.on("click", ".back", returnToLobby)
+
 document.addEventListener("keydown", controls)
 
 function main() {

@@ -37,6 +37,22 @@ html{
     background-color: #008CBA;
 }
 
+.back {
+    background-color: lightgrey; 
+    border: 2px solid palevioletred;
+    color: black;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 12px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+.back:hover {
+    background-color: palevioletred;
+}
+
 #zero {
     width: 100px;
     height: 100px;

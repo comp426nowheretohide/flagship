@@ -40,6 +40,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         console.log("user is signed in!");
         console.log(auth.currentUser);
+        location.replace('../SpaceshipRooms/index.html')
     } else {
         console.log("no user signed in");
     }

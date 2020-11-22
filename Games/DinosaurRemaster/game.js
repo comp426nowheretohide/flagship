@@ -116,3 +116,10 @@ document.addEventListener('keydown', (evt) => {
     }
 });
 
+const returnToLobby = function() {
+    location.replace("../../SpaceshipRooms/index.html")
+}
+
+let buttons = $('#buttons')
+buttons.on("click", ".back", returnToLobby)
+

@@ -412,8 +412,13 @@ $(function() {
 
     const $root = $('#root')
 
-    $root.on('click', '#submit', getAnswers)
+    $root.on('click', '.submit', getAnswers)
+    $root.on('click', '.back', returnToLobby)
 });
+
+function returnToLobby() {
+    location.replace('../../SpaceshipRooms/index.html')
+}
 
 function questionSelector() {
     let ret_arr = new Array();
@@ -430,7 +435,8 @@ function renderQuiz() {
     const $root = $('#root');
 
     $root.append(`<div id="customQuiz"></div>
-                    <button id="submit">Submit Answers</button>
+                    <button class="submit button">Submit Answers</button>
+                    <button class="back button">Back to Lobby</button>
                     <div class = "is-size-4" id="results"></div>`)
 }
 

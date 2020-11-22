@@ -59,6 +59,7 @@ const renderBoard = function () {
     })
 
     $root.on("click", ".reset", resetGame)
+    $root.on("click", ".back", returnToLobby)
 
 };
 
@@ -70,6 +71,10 @@ const resetGame = function () {
     game.setupNewGame()
     fillBoard()
     $('#checker').empty();
+}
+
+const returnToLobby = function() {
+    location.replace("../../SpaceshipRooms/index.html")
 }
 
 const startNewGame = function () {
@@ -112,6 +117,7 @@ const startNewGame = function () {
 
                 <div class="buttonContainer">
                     <button class="reset button">Reset Game</button>
+                    <button class="back button">Back to Lobby</button>
                 </div>`
 
     return html
