@@ -403,6 +403,8 @@ let randQuiz = questionSelector();
 
 let failed = false;
 
+let time = 59
+
 $(function() {
     renderQuiz();
 
@@ -530,3 +532,7 @@ function renderQuestions(questions, quiz) {
 setTimeout(function() {
     location.replace("../../VotingAndChat/index.html")
 }, 60000);
+
+setInterval(function() {
+    document.getElementById("time").innerHTML = time--;
+}, 1000)
