@@ -76,6 +76,8 @@ const returnToLobby = function() {
     location.replace("../../SpaceshipRooms/index.html")
 }
 
+let time = 59;
+
 const startNewGame = function () {
 
     let html = `<div class="container">
@@ -83,6 +85,7 @@ const startNewGame = function () {
                     <h2 class="hero is-size-3">Power the ship by combining tiles and get the 256 tile to complete the task!</h2>
                     <p class="subtitle is-5">By using the arrow keys, you can move the tiles around the board. Numbers will combine when two numbers with the same value collide with each other!</p>
                     <h3 id="scoreCounter" class= "is-size-3 mb-3">0</h3>
+                    <h5 id="time">59</h5>
                     </div>
 
                 <div id="checker"></div>
@@ -145,3 +148,7 @@ const fillBoard = function () {
 setTimeout(function() {
     location.replace("../../VotingAndChat/index.html")
 }, 60000);
+
+setInterval(function() {
+    document.getElementById("time").innerHTML = time--;
+}, 1000)

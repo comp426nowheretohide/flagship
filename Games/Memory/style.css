@@ -24,6 +24,11 @@
     vertical-align: text-top;
 }
 
+#time {
+    text-align: center;
+    font-size: 50px;
+}
+
 html {
     background-image: url('Static.jpg');
     background-size: cover;

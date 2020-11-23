@@ -12,8 +12,13 @@ joinForm.addEventListener('submit', (e) => {
     //.then will fire when the sign up is complete
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
         //clear out the form fields
+<<<<<<< HEAD
         joinForm.reset();
         location.replace('../SpaceshipRooms/index.html')
+=======
+        signUpForm.reset();
+        location.replace('../Lobby/index.html')
+>>>>>>> 028fa90f22fea821f28a4421bdebef862bbed000
     });
 })
 
@@ -30,7 +35,7 @@ logInForm.addEventListener('submit', (e) => {
     auth.setPersistence((firebase.auth.Auth.Persistence.SESSION)).then(_ => {
         auth.signInWithEmailAndPassword(email, password).then(cred => {
             logInForm.reset();
-            location.replace('../SpaceshipRooms/index.html')
+            location.replace('../Lobby/index.html')
         });
     })
 })
@@ -40,7 +45,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         console.log("user is signed in!");
         console.log(auth.currentUser);
-        location.replace('../SpaceshipRooms/index.html')
+        location.replace('../Lobby/index.html')
     } else {
         console.log("no user signed in");
     }

@@ -93,6 +93,11 @@
     }
 }
 
+#time {
+    text-align: center;
+    font-size: 30px;
+}
+
 html {
     background-image: url('Static.jpg');
     background-size: cover;

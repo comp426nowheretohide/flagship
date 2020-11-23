@@ -11,6 +11,8 @@ let dy = 0;
 let foodX;
 let foodY;
 
+let time = 59;
+
 let score = 0;
 
 let snake = [
@@ -175,3 +177,7 @@ function gameOver() {
 setTimeout(function() {
     location.replace("../../VotingAndChat/index.html")
 }, 60000);
+
+setInterval(function() {
+    document.getElementById("time").innerHTML = time--;
+}, 1000)

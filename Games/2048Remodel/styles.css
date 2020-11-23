@@ -235,6 +235,11 @@ html{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#time {
+    text-align: center;
+    font-size: 30px;
+}
+
 #fourteen {
     width: 100px;
     height: 100px;

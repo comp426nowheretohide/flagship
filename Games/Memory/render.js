@@ -247,6 +247,13 @@ $(function() {
     loadIntoDOM();
 });
 
+let time=59;
+
 setTimeout(function() {
     location.replace("../../VotingAndChat/index.html")
 }, 60000);
+
+setInterval(function() {
+    document.getElementById("time").innerHTML = time--;
+}, 1000)
+

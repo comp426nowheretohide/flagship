@@ -86,3 +86,8 @@ h1 {
 h2, p{
     text-align: center;
 }
+
+#time {
+    text-align: center;
+    font-size: 30px;
+}
