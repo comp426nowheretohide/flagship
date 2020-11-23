@@ -31,7 +31,8 @@ let createGame = async function(name, id){
     try{
         const result = await axios({
             method: 'put', 
-            url:`${base}/newGame/${id}/${name}`
+            url:`${base}/newGame/${id}/${name}`,
+            withCredentials: true
         })
         return result;
     }
@@ -44,7 +45,8 @@ let joinGame = async function(name, id){
     try{
         const result = await axios({
             method: 'post', 
-            url:`${base}/games/addPlayer/${id}/${name}`
+            url:`${base}/games/addPlayer/${id}/${name}`,
+            withCredentials: true,
         })
         return result;
     }
