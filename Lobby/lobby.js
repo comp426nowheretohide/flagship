@@ -25,7 +25,7 @@ createForm.addEventListener('submit', (e) => {
 
 })
 
-let base = 'https://arj00wp268.execute-api.us-east-2.amazonaws.com/prod';
+let base = 'https://k01kns80c4.execute-api.us-east-2.amazonaws.com/prod';
 
 let createGame = async function(name, id){
     try{
