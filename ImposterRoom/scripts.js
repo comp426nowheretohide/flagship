@@ -47,4 +47,14 @@ let createPeopleBoxes = () =>{
     return column;
 }
 
+let base = '';
+
+let killPlayer = async function(player, gameID){
+    const result = await axios({
+        method: 'post', 
+        url:`${base}/kill/${gameID}/${player}`
+    })
+    return result;
+}
+
 $('.columns').append(createPeopleBoxes());
