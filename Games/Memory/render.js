@@ -141,11 +141,27 @@ export const showMatched = function() {
 }
 
 export async function handleCompleteTask() {
+    /*
     const result = await axios({
         method: 'post', 
         url: 'https://gzj7bczfca.execute-api.us-east-2.amazonaws.com/prod/minigame/3xkdm2/sbahali/1',
         withCredentials: false,
     });
+    */
+}
+
+export async function handleFailedTask() {
+
+}
+
+export async function testCreateGame() {
+    const result = await axios({
+        method: 'put', 
+        url: 'https://1tlkebtmc7.execute-api.us-east-2.amazonaws.com/prod/newGame/3xkdm2/sbahali2',
+        withCredentials: false,
+    });
+
+    console.log(result);
 }
 
 export const loadIntoDOM = function() {
@@ -163,6 +179,8 @@ export const loadIntoDOM = function() {
         loadImages();
         canClick = true;
     }, 8000)
+
+    //testCreateGame();
 
     document.addEventListener('click', function(event) {
         var card = event.target.parentElement;
@@ -193,6 +211,7 @@ export const loadIntoDOM = function() {
                 if(flips <= 0){
                     pString = `<p class="has-text-danger is-size-4">You have no idea where you are. Task failed. </p>`;
                     //Send task failure to backend
+                    //handleFailedTask();
                 }
                 else{
                     pString = `<p class="has-text-danger is-size-4">You've got ${flips} flips left.</p>`;
@@ -213,7 +232,7 @@ export const loadIntoDOM = function() {
                     loadImages();
                     showMatched();
                     //Send successful result to backend
-                    handleCompleteTask();
+                    //handleCompleteTask();
                 }
             }, 3000)
         }
