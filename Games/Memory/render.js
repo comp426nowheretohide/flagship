@@ -140,6 +140,14 @@ export const showMatched = function() {
     }
 }
 
+export async function handleCompleteTask() {
+    const result = await axios({
+        method: 'post', 
+        url: 'https://gzj7bczfca.execute-api.us-east-2.amazonaws.com/prod/minigame/3xkdm2/sbahali/1',
+        withCredentials: false,
+    });
+}
+
 export const loadIntoDOM = function() {
     const $root = $('#root');
 
@@ -205,6 +213,7 @@ export const loadIntoDOM = function() {
                     loadImages();
                     showMatched();
                     //Send successful result to backend
+                    handleCompleteTask();
                 }
             }, 3000)
         }
