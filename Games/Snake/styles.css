@@ -24,8 +24,8 @@ canvas {
     margin:auto;
 }
 
-html {
-    background-image: url('static.png');
+body {
+    background-image: url('Static.jpg');
     background-size: cover;
 }
 

@@ -7,7 +7,7 @@
 }
 
 .asteroid {
-    background-image: url(Asteroid.png);
+    background-image: url(Asteroid.jpg);
     background-size: 125px 125px;
     position: relative;
     top: 100px;
@@ -93,8 +93,8 @@
     }
 }
 
-html {
-    background-image: url('static.png');
+body {
+    background-image: url('Static.jpg');
     background-size: cover;
 }
 

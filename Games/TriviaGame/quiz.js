@@ -413,7 +413,6 @@ $(function() {
     const $root = $('#root')
 
     $root.on('click', '.submit', getAnswers)
-    $root.on('click', '.back', returnToLobby)
 });
 
 function returnToLobby() {
@@ -436,7 +435,6 @@ function renderQuiz() {
 
     $root.append(`<div id="customQuiz"></div>
                     <button class="submit button">Submit Answers</button>
-                    <button class="back button">Back to Lobby</button>
                     <div class = "is-size-4" id="results"></div>`)
 }
 
@@ -528,3 +526,7 @@ function renderQuestions(questions, quiz) {
     $('#customQuiz').append(question.join(''))
 
 }
+
+setTimeout(function() {
+    location.replace("../../VotingAndChat/index.html")
+}, 60000);
