@@ -74,7 +74,7 @@ label > input[type="radio"]:checked {
 	background-color: orange;
 }
 
-html {
+body {
     background-image: url('static.jpg');
     background-size: cover;
 }

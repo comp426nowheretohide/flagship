@@ -24,7 +24,7 @@
     vertical-align: text-top;
 }
 
-html {
+body {
     background-image: url('static.jpg');
     background-size: cover;
 }

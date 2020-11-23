@@ -99,8 +99,8 @@
     }
 }
 
-html {
-    background-image: url('static.png');
+body {
+    background-image: url('static.jpg');
     background-size: cover;
 }
 
