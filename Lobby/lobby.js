@@ -11,15 +11,15 @@ joinForm.addEventListener('submit', (e) => {
 
 })
 
-const logInForm = document.querySelector('#create-form');
+const createForm = document.querySelector('#create-form');
 
-logInForm.addEventListener('submit', (e) => {
+createForm.addEventListener('submit', (e) => {
     //prevent page from refreshing
     e.preventDefault();
 
     //get user info
-    const name = logInForm['createName'].value;
-    const id = logInForm['createID'].value;
+    const name = createForm['createName'].value;
+    const id = createForm['createID'].value;
 
     createGame(name, id);
 
@@ -27,7 +27,7 @@ logInForm.addEventListener('submit', (e) => {
 
 let base = 'https://1tlkebtmc7.execute-api.us-east-2.amazonaws.com/prod';
 
-export async function createGame(name, id){
+let createGame = async function(name, id){
     try{
         const result = await axios({
             method: 'put', 
@@ -40,7 +40,7 @@ export async function createGame(name, id){
     }
 }
 
-export async function joinGame(name, id){
+let joinGame = async function(name, id){
     try{
         const result = await axios({
             method: 'post', 
