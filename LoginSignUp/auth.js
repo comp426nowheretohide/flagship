@@ -1,18 +1,18 @@
 const signUpForm = document.querySelector('#signup-form');
 
-signUpForm.addEventListener('submit', (e) => {
+joinForm.addEventListener('submit', (e) => {
     //prevent auto-refreshing
     e.preventDefault();
     //get user info
-    const email = signUpForm['signUpUser'].value;
-    const password = signUpForm['signUpPass'].value;
+    const email = joinForm['signUpUser'].value;
+    const password = joinForm['signUpPass'].value;
     
     //signup the user
 
     //.then will fire when the sign up is complete
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
         //clear out the form fields
-        signUpForm.reset();
+        joinForm.reset();
         location.replace('../SpaceshipRooms/index.html')
     });
 })
