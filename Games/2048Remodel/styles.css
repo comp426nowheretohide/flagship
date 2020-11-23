@@ -261,7 +261,7 @@ html{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-body {
+html {
     background-image: url('Static.jpg');
     background-size: cover;
 }
