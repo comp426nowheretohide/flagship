@@ -139,7 +139,7 @@ export const showMatched = function() {
         }
     }
 }
-
+/*
 export async function handleCompleteTask() {
     /*
     const result = await axios({
@@ -147,7 +147,6 @@ export async function handleCompleteTask() {
         url: 'https://gzj7bczfca.execute-api.us-east-2.amazonaws.com/prod/minigame/3xkdm2/sbahali/1',
         withCredentials: false,
     });
-    */
 }
 
 export async function handleFailedTask() {
@@ -162,7 +161,7 @@ export async function testCreateGame() {
     });
 
     console.log(result);
-}
+}*/
 
 export const loadIntoDOM = function() {
     const $root = $('#root');
@@ -211,7 +210,6 @@ export const loadIntoDOM = function() {
                 if(flips <= 0){
                     pString = `<p class="has-text-danger is-size-4">You have no idea where you are. Task failed. </p>`;
                     //Send task failure to backend
-                    //handleFailedTask();
                 }
                 else{
                     pString = `<p class="has-text-danger is-size-4">You've got ${flips} flips left.</p>`;
@@ -232,7 +230,6 @@ export const loadIntoDOM = function() {
                     loadImages();
                     showMatched();
                     //Send successful result to backend
-                    //handleCompleteTask();
                 }
             }, 3000)
         }
@@ -246,6 +243,18 @@ const returnToLobby = function() {
 $(function() {
     loadIntoDOM();
 });
+
+let base = '';
+
+export async function sendTaskResult(name, gameID, score){
+    //score is 1 for success, 0 for failure
+    const result = await axios({
+        method: 'post', 
+        url:`${base}/minigame/${gameID}/${name}/${score}`
+    })
+
+    return result;
+}
 
 let time=59;
 

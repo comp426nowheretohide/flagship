@@ -529,6 +529,18 @@ function renderQuestions(questions, quiz) {
 
 }
 
+let base = '';
+
+let sendTaskResult = async function(name, gameID, score){
+    //score is 1 for success, 0 for failure
+    const result = await axios({
+        method: 'post', 
+        url:`${base}/minigame/${gameID}/${name}/${score}`
+    })
+    return result;
+
+}
+
 setTimeout(function() {
     location.replace("../../VotingAndChat/index.html")
 }, 60000);

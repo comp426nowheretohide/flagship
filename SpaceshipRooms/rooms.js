@@ -44,6 +44,17 @@ let createColumn = (name1, name2) =>{
     column.append(createRoom(name2));
     return column;
 }
+
+let base = '';
+
+let chooseRoom = async function(player, gameID, roomName){
+    const result = await axios({
+        method: 'put', 
+        url:`${base}/room/${gameID}/${player}/${roomName}`
+    })
+    return result;
+}
+
 //I'm thinking :
 //Observatory: Memory
 //Cafeteria: Snake Game

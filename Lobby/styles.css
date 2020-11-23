@@ -10,9 +10,3 @@ h1 {
 h2, p{
     text-align: center;
 }
-textarea {
-    margin: auto;
-    width: 400px;
-    text-align: center;
-    display: block;
-}
