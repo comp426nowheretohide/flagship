@@ -78,8 +78,8 @@ setInterval(async function() {
         if(users[5] !== undefined) {
             try {
                 const res = await axios({
-                    method: 'get',
-                    url: `${base}/games/${gameId}/aliveC`,
+                    method: 'post',
+                    url: `${base}/newRound/${gameId}`,
                     headers: {
                         authorization: `bearer ${idToken}`
                     },
