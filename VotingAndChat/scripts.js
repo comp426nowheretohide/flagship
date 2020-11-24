@@ -103,17 +103,12 @@ let beginEjection = async function () {
         //$('body').append(message);
         let res = await generateNewRound();
         let gameWon = res["won"];
-        if (gameWon == undefined || gameWon == "false" || gameWon == false) {
+        if (gameWon == undefined) {
             message.html("The imposter is still around");
         }
         $('body').append(message);
         setTimeout(async () => {
-            if (gameWon == undefined || gameWon == "false" || gameWon == false) {
-                location.replace('../SpaceshipRooms/index.html');
-            }
-            else {
-                location.replace('../Victory/index.html');
-            }
+            location.replace('../SpaceshipRooms/index.html');
         }, 2000);
     }, 3000)
 }
@@ -242,7 +237,7 @@ setTimeout(async () => {
     clearInterval(timerInterval);
     let votes = await getVotes();
     for (let i = 0; i < votes.length; i++) {
-        let player = await getPlayer(i);
+        let player = await getPlayer(i+1);
         $(`#p${player}`).html(`${player} voted for ${votes[i]}.`);
     }
     setTimeout(async () => {
