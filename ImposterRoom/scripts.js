@@ -17,6 +17,19 @@ let getRooms = async function () {
         },
         withCredentials: true
     })
+    console.log(result.data);
+    return result.data;
+}
+
+let getPlayer = async function (id) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/user${id}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
     return result.data;
 }
 
@@ -56,9 +69,9 @@ let createPeopleBox = (name) => {
         if (!voteButtonsActive) {
             let voteBtn = $('<button class="button is-success is-inline is-small level-item">✔</button>');
             let cancelBtn = $('<button class="button is-danger is-inline is-small level-item">✘</button>');
-            voteBtn.on('click', () => {
+            voteBtn.on('click', async () => {
                 //kill the player
-                killPlayer(name);
+                await killPlayer(name);
                 btns.empty();
             })
             cancelBtn.on('click', () => {
@@ -73,17 +86,6 @@ let createPeopleBox = (name) => {
     return box;
 }
 
-let getPlayer = async function (id) {
-    const result = await axios({
-        method: 'get',
-        url: `${base}/games/${gameID}/user${id}`,
-        headers: {
-            authorization: `bearer ${idToken}`,
-        },
-        withCredentials: true
-    })
-    return result.data;
-}
 
 let createPeopleBoxes = async () => {
     let column = $('<div class = "column">');

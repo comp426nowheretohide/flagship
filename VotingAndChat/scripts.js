@@ -93,25 +93,29 @@ let beginEjection = async function () {
     setTimeout(async () => {
         $('body').empty();
         let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
-        let ejectedPlayer = await lastEjected();
+ /*       let ejectedPlayer = await lastEjected();
         if (ejectedPlayer == '') {
             message.html('No one was ejected.');
         }
         else {
             message.html(`${ejectedPlayer} was ejected.`);
-        }
+        }*/
         $('body').append(message);
-
+        let res = await generateNewRound();
+        let gameWon = res["won"];
+        setTimeout(async ()=>{
+            if(gameWon == "false"){
+                message.html('The imposter is still at large');
+            }
+        }, 1000);
         setTimeout(async () => {
-            let res = await generateNewRound();
-            let gameWon = res["won"];
             if (gameWon == "false") {
                 location.replace('../SpaceshipRooms/index.html');
             }
             else {
                 location.replace('../Victory/index.html');
             }
-        }, 5000);
+        }, 2000);
     }, 3000)
 }
 
