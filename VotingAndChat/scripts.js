@@ -6,6 +6,7 @@ let currUser = sessionStorage.currUser;
 let voteButtonsActive = false;
 
 let createPeopleBox = async (vote) => {
+    console.log('peopleBox called');
     let box = $(`<div class = "box player" id= "${vote}"></div>`);
     let field = $(`<div class = "field level"></div>`);
     let p = $(`<p id = "#p${vote}">${vote}</p>`);
