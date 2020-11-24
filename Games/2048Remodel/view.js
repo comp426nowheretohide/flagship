@@ -1,8 +1,10 @@
 import Game from './engine/game.js'
 
 let game = new Game(4)
-let idToken = sessionStorage.gameID;
+let idToken = sessionStorage.authToken;
+let gameID = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
+let base = sessionStorage.base;
 
 const renderBoard = function () {
     // Grab a jQuery reference to the root HTML element
@@ -38,7 +40,6 @@ const renderBoard = function () {
         checker.empty();
         if (checker.hasClass('victory')) {
             checker.append(`<p class="is-size-4 has-text-success">Even more power!! Nice job!</p>`);
-            sendTaskResult(currUser, idToken, 1);
             return;
         }
         else {
@@ -56,11 +57,9 @@ const renderBoard = function () {
         checker.empty();
         if (checker.hasClass('victory')) {
             checker.append(`<p class="is-size-4 has-text-danger">Sorry! You can reset for fun while you wait for the other crewmates.</p>`);
-            sendTaskResult(currUser, idToken, 0);
         }
         else {
             checker.append(`<p class="is-size-4 has-text-danger">Engine Failure. Manual Reboot (by reset) Required.</p>`);
-            sendTaskResult(currUser, idToken, 0);
         }
     })
 
@@ -78,7 +77,7 @@ const resetGame = function () {
     $('#checker').empty();
 }
 
-const returnToLobby = function() {
+const returnToLobby = function () {
     location.replace("../../SpaceshipRooms/index.html")
 }
 
@@ -151,31 +150,101 @@ const fillBoard = function () {
     }
 }
 
-let base = '';
-
-let sendTaskResult = async function(name, gameID, score){
+let sendTaskResult = async function (name, id, score) {
     //score is 1 for success, 0 for failure
     const result = await axios({
-        method: 'post', 
-        url:`${base}/minigame/${gameID}/${name}/${score}`,
+        method: 'post',
+        url: `${base}/minigame/${id}/${name}/${score}`,
         headers: {
-            authorization: `bearer ${gameID}`,
-        }, 
+            authorization: `bearer ${idToken}`,
+        },
         withCredentials: true
     })
 }
-/*
-let isPlayerAlive = async function(){
+
+let isPlayerAlive = async function () {
     const result = await axios({
         method: 'get',
-        url:`${base}/games/${gameID}`
+        url: `${base}/alive/${gameID}/${currUser}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
     })
-}*/
+    return result.data;
+}
 
-setTimeout(function() {
-    location.replace("../../VotingAndChat/index.html")
-}, 60000);
+let getImposter = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/aliveI`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
 
-setInterval(function() {
+let getMinigame = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/minigame`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getPlayer = async function (id) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/user${id}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let timerInterval = setInterval(function () {
     document.getElementById("time").innerHTML = time--;
 }, 1000)
+
+setTimeout(async function () {
+    clearInterval(timerInterval);
+    setTimeout(()=>{
+        location.replace("../../VotingAndChat/index.html");
+    }, 10000);
+    let isAlive = await isPlayerAlive();
+    $('body').empty();
+    let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
+    if (!isAlive) {
+        let imposterResult = await getImposter();
+        message.addClass('has-text-danger');
+        message.html(`You were stabbed to death by ${imposterResult}.`);
+    }
+    else {
+        let random = Math.random();
+        if (random > .5) {
+            message.addClass('has-text-success');
+            let playersMinigamesCompleted = await getMinigame();
+            let randomIndex = Math.random() * playersMinigamesCompleted.length;
+            let player = await getPlayer(id + 1);
+            if (playersMinigamesCompleted[randomIndex] == 0) {
+                message.html(`Clue: ${player} did not complete their task.`);
+            }
+            else {
+                message.html(`Clue: ${player} completed their task.`);
+            }
+        }
+        else{
+            message.html('No clues discovered.');
+        }
+    }
+    body.append(message);
+
+}, 60000);

@@ -1,11 +1,12 @@
 const asteroids = $('#asteroids');
 
-document.body.style.cursor = 'Asteroid.png';
-
 let speed = 1500;
 let count = 0;
-let idToken = sessionStorage.gameID;
+
+let idToken = sessionStorage.authToken;
+let gameID = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
+let base = sessionStorage.base;
 
 $(document).ready(() => {
     asteroids.on('click', () => {
@@ -68,28 +69,71 @@ const generateAsteroid = (num) => {
 
 };
 
-let base = '';
-
 let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
     const result = await axios({
         method: 'post', 
         url:`${base}/minigame/${gameID}/${name}/${score}`,
         headers: {
-            authorization: `bearer ${gameID}`,
+            authorization: `bearer ${idToken}`,
         }, 
         withCredentials: true
     })
+}
+
+let isPlayerAlive = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameID}/${currUser}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getImposter = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/aliveI`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
 }
 
 let runGame = setInterval(generateAsteroid, speed + 50);
 
 let time = 59
 
-setTimeout(function() {
-    location.replace("../../VotingAndChat/index.html")
+setTimeout(async function() {
+    clearInterval(timerInterval);
+    setTimeout(()=>{
+        location.replace("../../VotingAndChat/index.html");
+    }, 10000);
+    let isAlive = await isPlayerAlive();
+    $('body').empty();
+    let message = $('<p style = "margin-top: 300px" class= "is-size-4 has-text-danger"></p>');
+    if (!isAlive) {
+        let imposterResult = await getImposter();
+        message.html(`You were stabbed to death by ${imposterResult}.`);
+    }
+    else {
+        let random = Math.random();
+        if(random > .8){
+
+        }
+        else{
+            message.html('No clues discovered.');
+        }
+        
+    }
+    body.append(message);
 }, 60000);
 
-setInterval(function() {
+let timerInterval = setInterval(function() {
     document.getElementById("time").innerHTML = time--;
 }, 1000)
