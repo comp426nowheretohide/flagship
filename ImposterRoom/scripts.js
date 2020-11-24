@@ -33,11 +33,10 @@ let getPlayer = async function (id) {
     return result.data;
 }
 
-let playersRooms = null; 
 let imposterRoom = null;
 
 let getImposterRoom = async () => {
-    playersRooms = await getRooms();
+    let playersRooms = await getRooms();
     for (let i = 0; i < 6; i++) {
         let player = await getPlayer(i + 1);
         if (player == currUser) {
@@ -92,6 +91,7 @@ let createPeopleBoxes = async () => {
     //access the backend and get the names of the players is in the room 
     //EXAMPLE: 
     //column.append(createPeopleBox("Shane"));
+    let playersRooms = await getRooms();
     for(let i = 0; i < playersRooms.length; i++){
         if(playersRooms[i] == imposterRoom){
             let name = await getPlayer(i);
@@ -122,4 +122,8 @@ setTimeout(()=>{
     location.replace("../../VotingAndChat/index.html");
 }, 70000)
 
-$('.columns').append(createPeopleBoxes());
+let appendBoxes = async function (){
+    $('.columns').append(await createPeopleBoxes());
+}
+
+appendBoxes();
