@@ -272,7 +272,7 @@ export async function sendTaskResult(name, gameID, score) {
 
 let time = 59;
 
-setTimeout(function () {
+setTimeout(async function () {
     clearInterval(timerInterval);
     setTimeout(() => {
         location.replace("../../VotingAndChat/index.html");

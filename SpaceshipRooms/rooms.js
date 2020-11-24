@@ -88,7 +88,7 @@ display.append(columns);
 let getImposter = async function () {
     const result = await axios({
         method: 'get',
-        url: `${base}/games/${gameID}/aliveI`,
+        url: `${gameBase}/games/${gameID}/aliveI`,
         headers: {
             authorization: `bearer ${idToken}`,
         },
