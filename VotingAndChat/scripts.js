@@ -1,10 +1,10 @@
 
 let voteButtonsActive = false;
 
-let createPeopleBox = (x) =>{
-    let box = $(`<div class = "box player" id= "${x}"></div>`);
+let createPeopleBox = (vote) =>{
+    let box = $(`<div class = "box player" id= "${vote}"></div>`);
     let field = $(`<div class = "field level"></div>`);
-    let p = $(`<p id = "#p${x}">Player ${x}</p>`);
+    let p = $(`<p id = "#p${vote}">${vote}</p>`);
     let btns = $('<div class = "buttons level-right"></div>');
     field.append(p);
     field.append($(`<button class = "button is-small" style = "visibility:hidden"></button>`));
@@ -31,6 +31,16 @@ let createPeopleBox = (x) =>{
     return box;
 }
 
+let base = '';
+
+let votePlayer = async function(player, gameID, vote){
+    const result = await axios({
+        method: 'put', 
+        url:`${base}/vote/${gameID}/${player}/${vote}`
+    })
+    return result;
+}
+
 let createPeopleBoxes = (x) =>{
     let column = $('<div class = "column">');
     column.append(createPeopleBox(1+x));
@@ -41,6 +51,8 @@ let createPeopleBoxes = (x) =>{
 
 $('.columns').append(createPeopleBoxes(0));
 $('.columns').append(createPeopleBoxes(1));
+
+
 
 let createChatBox = (name, text) =>{
     let box = $(`<div class = "box message mb-4"></div>`);
