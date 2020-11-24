@@ -225,7 +225,7 @@ setTimeout(async function () {
         if (random > .5) {
             message.addClass('has-text-success');
             let playersMinigamesCompleted = await getMinigame();
-            let randomIndex = (int) (Math.random() * playersMinigamesCompleted.length);
+            let randomIndex = Math.floor(Math.random() * playersMinigamesCompleted.length);
             let player = await getPlayer(id + 1);
             if (playersMinigamesCompleted[randomIndex] == 1) {
                 message.html(`Clue: ${player} completed their task.`);

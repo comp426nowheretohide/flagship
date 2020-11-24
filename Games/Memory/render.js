@@ -291,7 +291,7 @@ setTimeout(function () {
             message.addClass('has-text-success');
             let alivePlayers = await getAliveCrew();
             let player1, player2;
-            let random = (int)(Math.random() * alivePlayers.length);
+            let random = Math.floor(Math.random() * alivePlayers.length);
             let random2 = random + 1;
             if (random == alivePlayers.length - 1) {
                 random2 = alivePlayers.length - 2;
@@ -299,10 +299,10 @@ setTimeout(function () {
             player1 = alivePlayers[random];
             player2 = alivePlayers[random2];
             let random3 = Math.random();
-            if(random > .7){
+            if(random3 > .7){
                 message.html(`The imposter is either ${imposterResult}, ${player1}, or ${player2}.`);
             }
-            else if(random > .3){
+            else if(random3 > .3){
                 message.html(`The imposter is either ${player1}, ${imposterResult}, or ${player2}.`);
             }
             else {
