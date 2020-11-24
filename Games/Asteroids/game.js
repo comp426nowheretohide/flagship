@@ -13,7 +13,7 @@ let taskCompleted = false;
 $(document).ready(() => {
     asteroids.on('click', () => {
         count++;
-        if (count >= 20){
+        if (count >= 20 && !taskCompleted){
             $('p').removeClass('has-text-danger');
             $('p').addClass('has-text-success');
             $('p').html('Task completed successfully');
