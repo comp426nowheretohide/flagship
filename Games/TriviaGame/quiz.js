@@ -487,10 +487,6 @@ function showResults(questions, quiz, result){
             //send failure to backend
             sendTaskResult(currUser, gameID, 0);
         } 
-        else if(failed){
-            result.style.color = 'green';
-            result.innerHTML = "Nice improvement! Come back next round!";
-        }
         else {
             result.style.color = 'green';
             result.innerHTML = "System calibrated correctly! Task completed!";
