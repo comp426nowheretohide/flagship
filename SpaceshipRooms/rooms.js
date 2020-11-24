@@ -2,7 +2,7 @@ let display = $('#display');
 let columns = $('<div class = "columns is-multiline justify-center"></div>');
 
 let idToken = sessionStorage.authToken;
-let gameID = sessionStorage.gameID;
+let gameID = sessionStorage.gameId;
 let currUser = sessionStorage.currentUser;
 let gameBase = sessionStorage.base;
 let time = 29;
@@ -53,8 +53,6 @@ let createColumn = (name1, name2) =>{
     column.append(createRoom(name2));
     return column;
 }
-
-let base = '';
 
 let chooseRoom = async function(roomName){
     const result = await axios({
