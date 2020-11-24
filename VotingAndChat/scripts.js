@@ -1,7 +1,7 @@
 let gameId = sessionStorage.gameId;
 let idToken = sessionStorage.authToken;
 let base = sessionStorage.base;
-let currUser = sessionStorage.currUser;
+let currUser = sessionStorage.currentUser;
 
 let voteButtonsActive = false;
 
