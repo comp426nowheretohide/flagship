@@ -5,8 +5,10 @@ const snake_border = 'chartreuse';
 const food_col = 'white';
 const food_border = 'red';
 
-let idToken = sessionStorage.gameID;
+let idToken = sessionStorage.authToken;
+let gameID = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
+let base = sessionStorage.base;
 
 let dx = 10;
 let dy = 0;
@@ -45,7 +47,7 @@ function main() {
             $('p').addClass('has-text-danger');
             $('#score').addClass('has-text-danger');
             //send failed result to backend
-            sendTaskResult(currUser, idToken, 0);
+            sendTaskResult(currUser, gameID, 0);
         }
         return;
     }
@@ -179,7 +181,6 @@ function gameOver() {
     return leftWall || rightWall || topWall || bottomWall;
 }
 
-let base = '';
 
 let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
@@ -187,15 +188,88 @@ let sendTaskResult = async function(name, gameID, score){
         method: 'post', 
         url:`${base}/minigame/${gameID}/${name}/${score}`,
         headers: {
-            authorization: `bearer ${gameID}`,
+            authorization: `bearer ${idToken}`,
         }, 
         withCredentials: true
     })
 
 }
 
+let isPlayerAlive = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameID}/${currUser}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getImposter = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/aliveI`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getPlayer = async function (id) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/user${id}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getRooms = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/rooms`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
 setTimeout(function() {
-    location.replace("../../VotingAndChat/index.html")
+    clearInterval(timerInterval);
+    setTimeout(()=>{
+        location.replace("../../VotingAndChat/index.html");
+    }, 10000);
+    let isAlive = await isPlayerAlive();
+    $('body').empty();
+    let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
+    if (!isAlive) {
+        let imposterResult = await getImposter();
+        message.html(`You were stabbed to death by ${imposterResult}.`);
+    }
+    else {
+        let random = Math.random();
+        if(random > .4){
+            let playersRooms = await getRooms();
+            let randomIndex = (int) (Math.random() * playersRooms.length);
+            let player = await getPlayer(id + 1);
+            let room = playersRooms[randomIndex];
+            message.addClass('has-text-success');
+            message.html(`Clue: ${player} went in the ${room}.`);
+        }
+        else{
+            message.html('No clues discovered.');
+        }
+    }
+    body.append(message);
 }, 60000);
 
 setInterval(function() {

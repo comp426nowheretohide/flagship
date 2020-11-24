@@ -17,7 +17,7 @@ $(document).ready(() => {
             $('p').html('Task completed successfully');
 
             //send task completed to backend
-            sendTaskResult(currUser, idToken, 1);
+            sendTaskResult(currUser, gameID, 1);
         }
         else {
             $('#count').html(`${count} out of 20 asteroids shot.`);
@@ -105,6 +105,31 @@ let getImposter = async function () {
     return result.data;
 }
 
+let getPlayer = async function (id) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/user${id}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getRooms = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/rooms`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+
 let runGame = setInterval(generateAsteroid, speed + 50);
 
 let time = 59
@@ -116,15 +141,20 @@ setTimeout(async function() {
     }, 10000);
     let isAlive = await isPlayerAlive();
     $('body').empty();
-    let message = $('<p style = "margin-top: 300px" class= "is-size-4 has-text-danger"></p>');
+    let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
     if (!isAlive) {
         let imposterResult = await getImposter();
         message.html(`You were stabbed to death by ${imposterResult}.`);
     }
     else {
         let random = Math.random();
-        if(random > .8){
-
+        if(random > .7){
+            let playersRooms = await getRooms();
+            let randomIndex = (int) (Math.random() * playersRooms.length);
+            let player = await getPlayer(id + 1);
+            let room = playersRooms[randomIndex];
+            message.addClass('has-text-success');
+            message.html(`Clue: ${player} went in the ${room}.`);
         }
         else{
             message.html('No clues discovered.');
@@ -132,6 +162,7 @@ setTimeout(async function() {
         
     }
     body.append(message);
+    
 }, 60000);
 
 let timerInterval = setInterval(function() {
