@@ -1,3 +1,6 @@
+let idToken = sessionStorage.gameID;
+let currUser = sessionStorage.currentUser;
+
 let quizQuestions = [
     {
         question: "What is 2 + 2?",
@@ -478,6 +481,7 @@ function showResults(questions, quiz, result){
             result.innerHTML = "ERR: System Failure ! Task failed! ";
             failed = true;
             //send failure to backend
+            sendTaskResult(currUser, idToken, 0);
         } 
         else if(failed){
             result.style.color = 'green';
@@ -487,6 +491,7 @@ function showResults(questions, quiz, result){
             result.style.color = 'green';
             result.innerHTML = "System calibrated correctly! Task completed!";
             //send success to backend
+            sendTaskResult(currUser, idToken, 1);
         }
     }
 }
@@ -535,9 +540,12 @@ let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
     const result = await axios({
         method: 'post', 
-        url:`${base}/minigame/${gameID}/${name}/${score}`
+        url:`${base}/minigame/${gameID}/${name}/${score}`,
+        headers: {
+            authorization: `bearer ${gameID}`,
+        }, 
+        withCredentials: true
     })
-    return result;
 
 }
 
