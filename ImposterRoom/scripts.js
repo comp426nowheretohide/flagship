@@ -88,7 +88,7 @@ let createPeopleBoxes = async () => {
     //access the backend and get the names of the players is in the room 
     //EXAMPLE: 
     //column.append(createPeopleBox("Shane"));
-    for(let i = 0; i < 0; i++){
+    for(let i = 0; i < playersRooms.length; i++){
         if(playersRooms[i] == imposterRoom){
             let name = await getPlayer(i);
             column.append(createPeopleBox(name));
