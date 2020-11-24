@@ -1,6 +1,6 @@
 const joinForm = document.querySelector('#join-form');
 
-joinForm.addEventListener('submit', (e) => {
+joinForm.addEventListener('submit', async (e) => {
     //prevent auto-refreshing
     e.preventDefault();
     //get user info
@@ -22,7 +22,6 @@ createForm.addEventListener('submit', (e) => {
     const id = createForm['createID'].value;
 
     createGame(name, id);
-
 })
 
 let base = 'https://7td0d7czl7.execute-api.us-east-2.amazonaws.com/prod';
@@ -45,7 +44,8 @@ let createGame = async function(name, id){
         return result;
     }
     catch(error){
-        $('#create-form').append('<p class = "is-size-4 has-text-danger">Game ID already taken.</p>');
+       // $('#create-form').append('<p class = "is-size-4 has-text-danger">Game ID already taken.</p>');
+       $('#createError').html('Game ID already taken.');
     }
 }
 
@@ -62,6 +62,11 @@ let joinGame = async function(name, id){
         return result;
     }
     catch(error){
-        $('#join-form').append('<p class = "is-size-4 has-text-danger">No game ID found.</p>');
+        //$('#join-form').append('<p class = "is-size-4 has-text-danger">No game ID found.</p>');
+        $('#joinError').html('No game ID found.');
     }
+}
+
+let enterGameLobby = async function(){
+    
 }

@@ -152,7 +152,6 @@ const fillBoard = function () {
 }
 
 let base = '';
-let idToken = sessionStorage.authToken;
 
 let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
@@ -165,6 +164,13 @@ let sendTaskResult = async function(name, gameID, score){
         withCredentials: true
     })
 }
+/*
+let isPlayerAlive = async function(){
+    const result = await axios({
+        method: 'get',
+        url:`${base}/games/${gameID}`
+    })
+}*/
 
 setTimeout(function() {
     location.replace("../../VotingAndChat/index.html")
