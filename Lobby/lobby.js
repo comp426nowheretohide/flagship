@@ -53,6 +53,8 @@ let createGame = async function(name, id){
     }
 }
 
+console.log(sessionStorage.authToken)
+
 let joinGame = async function(name, id){
     let lowerId = id.toLowerCase();
     try{
