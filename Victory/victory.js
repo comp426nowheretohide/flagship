@@ -12,7 +12,7 @@ async function getWinner() {
         },
         withCredentials: true,
     })
-    return result.data.won;
+    return result.data;
 }
 
 
