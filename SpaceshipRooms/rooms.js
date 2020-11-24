@@ -76,7 +76,7 @@ let chooseRoom = async function (roomName) {
 let getRooms = async function () {
     const result = await axios({
         method: 'get',
-        url: `${base}/games/${gameID}/rooms`,
+        url: `${gameBase}/games/${gameID}/rooms`,
         headers: {
             authorization: `bearer ${idToken}`,
         },
