@@ -79,7 +79,7 @@ setInterval(async function() {
             try {
                 const res = await axios({
                     method: 'get',
-                    url: `${base}/games/${gameId}/aliveT`,
+                    url: `${base}/games/${gameId}/aliveC`,
                     headers: {
                         authorization: `bearer ${idToken}`
                     },
