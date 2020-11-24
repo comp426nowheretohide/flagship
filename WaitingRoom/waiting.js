@@ -33,7 +33,7 @@ async function findPlayers() {
     try{
         const result = await axios({
             method: 'get',
-            url: `${base}/alive/${gameId}`,
+            url: `${base}/loby/${gameId}`,
             headers: {
                 authorization: `bearer ${idToken}`
             },
@@ -45,9 +45,9 @@ async function findPlayers() {
     }
 }
 
-let base = 'https://7td0d7czl7.execute-api.us-east-2.amazonaws.com/prod';
 let gameId = sessionStorage.gameId;
 let idToken = sessionStorage.authToken;
+let base = sessionStorage.base;
 
 setInterval(async function() {
 

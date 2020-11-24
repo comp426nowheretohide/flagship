@@ -24,7 +24,9 @@ createForm.addEventListener('submit', (e) => {
     createGame(name, id);
 })
 
-let base = 'https://7td0d7czl7.execute-api.us-east-2.amazonaws.com/prod';
+let base = 'https://2dpdj0yk45.execute-api.us-east-2.amazonaws.com/prod';
+
+sessionStorage.setItem("base", base);
 
 let idToken = sessionStorage.authToken;
 
