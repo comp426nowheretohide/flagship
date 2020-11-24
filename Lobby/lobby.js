@@ -39,6 +39,7 @@ let createGame = async function(name, id){
             }, 
             withCredentials: true
         })
+        console.log("Registered game ID: " + result.gameId + " as user: " + result.user1)
         return result;
     }
     catch(error){
