@@ -101,9 +101,10 @@ let beginEjection = async function () {
             message.html(`${ejectedPlayer} was ejected.`);
         }
         $('body').append(message);
-        let res = await generateNewRound();
-        let gameWon = res["won"];
+
         setTimeout(async () => {
+            let res = await generateNewRound();
+            let gameWon = res["won"];
             if (gameWon == "false") {
                 location.replace('../SpaceshipRooms/index.html');
             }
@@ -241,6 +242,7 @@ setTimeout(async () => {
         let player = await getPlayer(i);
         $(`#p${player}`).html(`${player} voted for ${votes[i]}.`);
     }
+
     setTimeout(async () => {
         await beginEjection();
     }, 3000);
