@@ -61,6 +61,7 @@ let chooseRoom = async function(roomName){
         },
         withCredentials: true,
     })
+    console.log(result.data);
     return result;
 }
 
