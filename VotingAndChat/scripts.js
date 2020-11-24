@@ -148,7 +148,7 @@ let checkIfWon = async function () {
 let getPlayer = async function (id) {
     const result = await axios({
         method: 'get',
-        url: `${base}/games/${gameID}/user${id}`,
+        url: `${base}/games/${gameId}/user${id}`,
         headers: {
             authorization: `bearer ${idToken}`,
         },
