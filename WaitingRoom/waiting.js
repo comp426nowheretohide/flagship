@@ -33,7 +33,7 @@ async function findPlayers() {
     try{
         const result = await axios({
             method: 'get',
-            url: `${base}/loby/${gameId}`,
+            url: `${base}/lobby/${gameId}`,
             headers: {
                 authorization: `bearer ${idToken}`
             },
