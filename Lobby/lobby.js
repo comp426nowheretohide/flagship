@@ -31,10 +31,11 @@ sessionStorage.setItem("base", base);
 let idToken = sessionStorage.authToken;
 
 let createGame = async function(name, id){
+    let lowerId = id.toLowerCase();
     try {
         const result = await axios({
             method: 'put', 
-            url:`${base}/newGame/${id}/${name}`,
+            url:`${base}/newGame/${lowerId}/${name}`,
             headers: {
                 authorization: `bearer ${idToken}`,
             }, 
@@ -53,10 +54,11 @@ let createGame = async function(name, id){
 }
 
 let joinGame = async function(name, id){
+    let lowerId = id.toLowerCase();
     try{
         const result = await axios({
             method: 'post', 
-            url:`${base}/games/addPlayer/${id}/${name}`,
+            url:`${base}/games/addPlayer/${lowerId}/${name}`,
             headers: {
                 authorization: `bearer ${idToken}`
             },
