@@ -91,7 +91,7 @@ setInterval(async function() {
                 console.log("ERROR")
             }
 
-            // location.replace('../SpaceshipRooms/index.html')
+            location.replace('../SpaceshipRooms/index.html')
         }
         return result;
     } catch(error) {

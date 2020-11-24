@@ -7,7 +7,7 @@ let currUser = sessionStorage.currentUser;
 let gameBase = sessionStorage.base;
 let time = 29;
 
-
+let chosenRoom = ''
 
 
 let createRoom = (name) => {
@@ -23,21 +23,27 @@ let createRoom = (name) => {
         //send choice to backend and update the number with new total of players from backend;
         $('.enter').remove();
         if(event.currentTarget.id == "Electrical") {
+            chosenRoom = "Electrical"
             chooseRoom("Electrical");
             // location.replace("../Games/TriviaGame/index.html");
         } else if(event.currentTarget.id == "Engine") {
+            chosenRoom = "Engine"
             chooseRoom("Engine");
             // location.replace("../Games/2048Remodel/index.html");
         } else if(event.currentTarget.id == "Cafeteria") {
+            chosenRoom = "Cafeteria"
             chooseRoom("Cafeteria");
             // location.replace("../Games/Snake/index.html");
         } else if(event.currentTarget.id == "Observatory") {
+            chosenRoom = "Observatory"
             chooseRoom("Observatory");
             // location.replace("../Games/Memory/index.html");
         } else if(event.currentTarget.id == "Cockpit") {
+            chosenRoom = "Cockpit"
             chooseRoom("Cockpit");
             // location.replace("../Games/DinosaurRemaster/index.html");
         } else if(event.currentTarget.id == "Defense") {
+            chosenRoom = "Defense"
             chooseRoom("Defense");
             // location.replace("../Games/Asteroids/index.html");
         }
@@ -79,9 +85,21 @@ columns.append(createColumn('Cafeteria', 'Observatory'));
 columns.append(createColumn('Cockpit','Defense'));
 display.append(columns);
 
-// setTimeout(function() {
-//     location.replace('../Games/Snake/index.html')
-// }, 30000)
+setTimeout(function() {
+    if(chosenRoom == "Electrical") {
+        location.replace("../Games/TriviaGame/index.html");
+    } else if(chosenRoom == "Engine") {
+        location.replace("../Games/2048Remodel/index.html");
+    } else if(chosenRoom == "Cafeteria") {
+        location.replace("../Games/Snake/index.html");
+    } else if(chosenRoom == "Observatory") {
+        location.replace("../Games/Memory/index.html");
+    } else if(chosenRoom == "Cockpit") {
+        location.replace("../Games/DinosaurRemaster/index.html");
+    } else if(chosenRoom == "Defense") {
+        location.replace("../Games/Asteroids/index.html");
+    }
+}, 30000)
 
 setInterval(function() {
     document.getElementById("time").innerHTML = time--;
