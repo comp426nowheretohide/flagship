@@ -1,4 +1,4 @@
-function renderPlayers() {
+async function renderPlayers() {
     let html = `<section class = "container">
                     <div class="columns is-centered">
 
