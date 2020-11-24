@@ -197,7 +197,7 @@ let isPlayerAlive = async function (name) {
     return result.data;
 }
 
-let time = 59;
+let time = 60;
 
 let timerInterval = setInterval(function () {
     time--;
