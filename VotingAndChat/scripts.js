@@ -5,6 +5,18 @@ let currUser = sessionStorage.currentUser;
 
 let voteButtonsActive = false;
 
+let isPlayerAlive = async function (name) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameId}/${name}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
 let currUserAlive = null;
 let setCurrUserAlive = async ()=>{
     currUserAlive = await isPlayerAlive(currUser);
@@ -208,18 +220,6 @@ let getVotes = async function () {
         url: `${base}/games/${gameId}/vote`,
         headers: {
             authorization: `bearer ${idToken}`
-        },
-        withCredentials: true
-    })
-    return result.data;
-}
-
-let isPlayerAlive = async function (name) {
-    const result = await axios({
-        method: 'get',
-        url: `${base}/alive/${gameId}/${name}`,
-        headers: {
-            authorization: `bearer ${idToken}`,
         },
         withCredentials: true
     })
