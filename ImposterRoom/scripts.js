@@ -44,7 +44,7 @@ let getImposterRoom = async () => {
 }
 
 let createHeader = async ()=>{
-    await getImposterRoom();
+    let imposterRoom = await getImposterRoom();
     $('.container').prepend(`<h1 class="hero is-size-1 mb-2">${imposterRoom}</h1>`);
 }
 
@@ -90,7 +90,7 @@ let createPeopleBoxes = async () => {
     //EXAMPLE: 
     //column.append(createPeopleBox("Shane"));
     let playersRooms = await getRooms();
-    let imposterRoom = await getImposter();
+    let imposterRoom = await getImposterRoom();
     for(let i = 0; i < playersRooms.length; i++){
         if(playersRooms[i] == imposterRoom){
             let name = await getPlayer(i);
@@ -122,7 +122,8 @@ setTimeout(()=>{
 }, 70000)
 
 let appendBoxes = async function (){
-    $('.columns').append(await createPeopleBoxes());
+    let column = await createPeopleBoxes()
+    $('.columns').append(column);
 }
 
 appendBoxes();
