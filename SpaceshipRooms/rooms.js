@@ -134,9 +134,24 @@ let getImposter = async function () {
     return result.data;
 }
 
+let isPlayerAlive = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameID}/${currUser}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
 setTimeout(async function () {
     let imposter = await getImposter();
-    if (imposter == currUser) {
+    let isAlive = await isPlayerAlive();
+    if(isAlive){
+        location.replace("../Dead/index.html");
+    } else if (imposter == currUser) {
         location.replace("../ImposterRoom/index.html");
     } else if (chosenRoom == "Electrical") {
         location.replace("../Games/TriviaGame/index.html");
