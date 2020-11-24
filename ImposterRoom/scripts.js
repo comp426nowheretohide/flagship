@@ -20,8 +20,8 @@ let getRooms = async function () {
     return result.data;
 }
 
-let playersRooms; 
-let imposterRoom;
+let playersRooms = null; 
+let imposterRoom = null;
 
 let getImposterRoom = async () => {
     playersRooms = await getRooms();
@@ -32,7 +32,7 @@ let getImposterRoom = async () => {
         }
     }
 }
-
+getImposterRoom();
 
 $('.container').prepend(`<h1 class="hero is-size-1 mb-2">${imposterRoom}</h1>`);
 
@@ -106,5 +106,14 @@ let killPlayer = async function (player, gameID) {
     })
     return result;
 }
+
+let time = 69;
+let timerInterval = setInterval(function () {
+    document.getElementById("time").innerHTML = time--;
+}, 1000)
+
+setTimeout(()=>{
+    location.replace("../../VotingAndChat/index.html");
+}, 70000)
 
 $('.columns').append(createPeopleBoxes());
