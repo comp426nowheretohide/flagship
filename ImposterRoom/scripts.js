@@ -93,7 +93,7 @@ let createPeopleBoxes = async () => {
     let imposterRoom = await getImposterRoom();
     for(let i = 0; i < playersRooms.length; i++){
         if(playersRooms[i] == imposterRoom){
-            let name = await getPlayer(i);
+            let name = await getPlayer(i+1);
             column.append(createPeopleBox(name));
         }
     }
