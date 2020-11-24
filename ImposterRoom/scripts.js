@@ -33,14 +33,12 @@ let getPlayer = async function (id) {
     return result.data;
 }
 
-let imposterRoom = null;
-
 let getImposterRoom = async () => {
     let playersRooms = await getRooms();
     for (let i = 0; i < 6; i++) {
         let player = await getPlayer(i + 1);
         if (player == currUser) {
-            imposterRoom = playersRooms[i];
+            return playersRooms[i];
         }
     }
 }
@@ -92,6 +90,7 @@ let createPeopleBoxes = async () => {
     //EXAMPLE: 
     //column.append(createPeopleBox("Shane"));
     let playersRooms = await getRooms();
+    let imposterRoom = await getImposter();
     for(let i = 0; i < playersRooms.length; i++){
         if(playersRooms[i] == imposterRoom){
             let name = await getPlayer(i);

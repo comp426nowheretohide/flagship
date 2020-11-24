@@ -103,12 +103,12 @@ let beginEjection = async function () {
         //$('body').append(message);
         let res = await generateNewRound();
         let gameWon = res["won"];
-        if(gameWon=="false"){
+        if(gameWon==false){
             message.html("The imposter is still around");
         }
         $('body').append(message);
         setTimeout(async () => {
-            if (gameWon == "false") {
+            if (gameWon == false) {
                 location.replace('../SpaceshipRooms/index.html');
             }
             else {
