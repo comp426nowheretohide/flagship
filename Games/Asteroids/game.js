@@ -4,17 +4,19 @@ document.body.style.cursor = 'Asteroid.png';
 
 let speed = 1500;
 let count = 0;
+let idToken = sessionStorage.authToken;
+let currUser = sessionStorage.currentUser;
 
 $(document).ready(() => {
     asteroids.on('click', () => {
         count++;
-        if(count >= 20){
+        if (count >= 20){
             $('p').removeClass('has-text-danger');
             $('p').addClass('has-text-success');
             $('p').html('Task completed successfully');
 
             //send task completed to backend
-        
+            sendTaskResult(currUser, idToken, 1);
         }
         else {
             $('#count').html(`${count} out of 20 asteroids shot.`);
@@ -72,9 +74,12 @@ let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
     const result = await axios({
         method: 'post', 
-        url:`${base}/minigame/${gameID}/${name}/${score}`
+        url:`${base}/minigame/${gameID}/${name}/${score}`,
+        headers: {
+            authorization: `bearer ${gameID}`,
+        }, 
+        withCredentials: true
     })
-    return result;
 }
 
 let runGame = setInterval(generateAsteroid, speed + 50);

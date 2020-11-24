@@ -38,14 +38,14 @@ const renderBoard = function () {
         checker.empty();
         if (checker.hasClass('victory')) {
             checker.append(`<p class="is-size-4 has-text-success">Even more power!! Nice job!</p>`);
+            sendTaskResult(currUser, idToken, 1);
             return;
         }
         else {
             checker.addClass('victory');
             checker.append(`<p class="is-size-4 has-text-success">You've generated enough power for the engine! Task completed.</p>`);
             //send completed task to backend;
-
-
+            sendTaskResult(currUser, idToken, 1);
         }
     })
 
@@ -56,9 +56,11 @@ const renderBoard = function () {
         checker.empty();
         if (checker.hasClass('victory')) {
             checker.append(`<p class="is-size-4 has-text-danger">Sorry! You can reset for fun while you wait for the other crewmates.</p>`);
+            sendTaskResult(currUser, idToken, 0);
         }
         else {
             checker.append(`<p class="is-size-4 has-text-danger">Engine Failure. Manual Reboot (by reset) Required.</p>`);
+            sendTaskResult(currUser, idToken, 0);
         }
     })
 
@@ -156,9 +158,12 @@ let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
     const result = await axios({
         method: 'post', 
-        url:`${base}/minigame/${gameID}/${name}/${score}`
+        url:`${base}/minigame/${gameID}/${name}/${score}`,
+        headers: {
+            authorization: `bearer ${gameID}`,
+        }, 
+        withCredentials: true
     })
-    return result;
 }
 
 setTimeout(function() {

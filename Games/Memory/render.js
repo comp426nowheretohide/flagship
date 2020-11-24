@@ -6,6 +6,8 @@ var firstMove;
 let canClick = false;
 let flips = 10;
 let pString = `<p class="has-text-danger is-size-4">You've got ${flips} flips left.</p>`;
+let idToken = sessionStorage.authToken;
+let currUser = sessionStorage.currentUser;
 
 export const renderGameBoard = function(game) {
     return `
@@ -139,29 +141,6 @@ export const showMatched = function() {
         }
     }
 }
-/*
-export async function handleCompleteTask() {
-    /*
-    const result = await axios({
-        method: 'post', 
-        url: 'https://gzj7bczfca.execute-api.us-east-2.amazonaws.com/prod/minigame/3xkdm2/sbahali/1',
-        withCredentials: false,
-    });
-}
-
-export async function handleFailedTask() {
-
-}
-
-export async function testCreateGame() {
-    const result = await axios({
-        method: 'put', 
-        url: 'https://1tlkebtmc7.execute-api.us-east-2.amazonaws.com/prod/newGame/3xkdm2/sbahali2',
-        withCredentials: false,
-    });
-
-    console.log(result);
-}*/
 
 export const loadIntoDOM = function() {
     const $root = $('#root');
@@ -178,8 +157,6 @@ export const loadIntoDOM = function() {
         loadImages();
         canClick = true;
     }, 8000)
-
-    //testCreateGame();
 
     document.addEventListener('click', function(event) {
         var card = event.target.parentElement;
@@ -210,6 +187,7 @@ export const loadIntoDOM = function() {
                 if(flips <= 0){
                     pString = `<p class="has-text-danger is-size-4">You have no idea where you are. Task failed. </p>`;
                     //Send task failure to backend
+                    sendTaskResult(currUser, idToken, 0);
                 }
                 else{
                     pString = `<p class="has-text-danger is-size-4">You've got ${flips} flips left.</p>`;
@@ -230,6 +208,7 @@ export const loadIntoDOM = function() {
                     loadImages();
                     showMatched();
                     //Send successful result to backend
+                    sendTaskResult(currUser, idToken, 1);
                 }
             }, 3000)
         }
@@ -250,10 +229,12 @@ export async function sendTaskResult(name, gameID, score){
     //score is 1 for success, 0 for failure
     const result = await axios({
         method: 'post', 
-        url:`${base}/minigame/${gameID}/${name}/${score}`
+        url:`${base}/minigame/${gameID}/${name}/${score}`,
+        headers: {
+            authorization: `bearer ${gameID}`,
+        }, 
+        withCredentials: true
     })
-
-    return result;
 }
 
 let time=59;

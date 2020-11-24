@@ -5,6 +5,9 @@ const snake_border = 'chartreuse';
 const food_col = 'white';
 const food_border = 'red';
 
+let idToken = sessionStorage.authToken;
+let currUser = sessionStorage.currentUser;
+
 let dx = 10;
 let dy = 0;
 
@@ -42,6 +45,7 @@ function main() {
             $('p').addClass('has-text-danger');
             $('#score').addClass('has-text-danger');
             //send failed result to backend
+            sendTaskResult(currUser, idToken, 0);
         }
         return;
     }
@@ -156,6 +160,7 @@ function hasWon() {
         $('p').addClass('has-text-success');
         $('#score').addClass('has-text-success');
         //send successful result to backend
+        sendTaskResult(currUser, gameID, 1);
     }
 }
 
@@ -180,10 +185,12 @@ let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
     const result = await axios({
         method: 'post', 
-        url:`${base}/minigame/${gameID}/${name}/${score}`
+        url:`${base}/minigame/${gameID}/${name}/${score}`,
+        headers: {
+            authorization: `bearer ${gameID}`,
+        }, 
+        withCredentials: true
     })
-
-    return result;
 
 }
 
