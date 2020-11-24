@@ -90,8 +90,9 @@ setInterval(async function() {
             } catch(error) {
                 console.log("ERROR")
             }
-            
-            // location.replace('../SpaceshipRooms/index.html')
+            setTimeout(function(){
+                location.replace('../SpaceshipRooms/index.html')
+            }, 5000)
         }
         return result;
     } catch(error) {
