@@ -5,6 +5,8 @@ let idToken = sessionStorage.authToken;
 let gameID = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
 let gameBase = sessionStorage.base;
+let time = 29;
+
 
 let createRoom = (name) => {
     let box = $(`<div class = "box has-text-centered"></box>`);
@@ -75,3 +77,7 @@ columns.append(createColumn('Electrical','Engine'));
 columns.append(createColumn('Cafeteria', 'Observatory'));
 columns.append(createColumn('Cockpit','Defense'));
 display.append(columns);
+
+setInterval(function() {
+    document.getElementById("time").innerHTML = time--;
+}, 1000)

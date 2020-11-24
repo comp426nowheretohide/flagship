@@ -15,9 +15,7 @@ async function getWinner() {
     return result.data;
 }
 
-
 let winner = getWinner();
-
 
 function renderWinner() {
     let html = `<section class="hero is-fullheight">
