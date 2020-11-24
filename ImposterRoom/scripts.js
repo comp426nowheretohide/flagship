@@ -100,7 +100,7 @@ let createPeopleBoxes = async () => {
     return column;
 }
 
-let killPlayer = async function (player, gameID) {
+let killPlayer = async function (player) {
     const result = await axios({
         method: 'post',
         url: `${base}/kill/${gameID}/${player}`,
