@@ -86,7 +86,6 @@ setInterval(async function() {
                     withCredentials: true,
                 })
                 console.log(res.data);
-                return res;
             } catch(error) {
                 console.log("ERROR")
             }
