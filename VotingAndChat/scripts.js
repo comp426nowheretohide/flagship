@@ -102,10 +102,6 @@ let beginEjection = async function () {
         //}
         //$('body').append(message);
         let res = await generateNewRound();
-        let gameWon = res["won"];
-        if (gameWon == undefined) {
-            message.html("The imposter is still around");
-        }
         $('body').append(message);
         setTimeout(async () => {
             location.replace('../SpaceshipRooms/index.html');
