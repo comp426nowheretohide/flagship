@@ -243,7 +243,7 @@ let getKillRoom = async function () {
     return result.data;
 }
 
-setTimeout(function() {
+setTimeout(async function() {
     clearInterval(timerInterval);
     setTimeout(()=>{
         location.replace("../../VotingAndChat/index.html");
