@@ -169,8 +169,14 @@ let createPeopleBoxes = async (x1, x2, x3) => {
 
 let createPlayerBoxes = async () => {
     console.log('before');
-    let column1 = createPeopleBoxes(await getPlayer(1), await getPlayer(2), await getPlayer(3));
-    let column2 = createPeopleBoxes(await getPlayer(4), await getPlayer(5), await getPlayer(6));
+    let player1 = await getPlayer(1);
+    let player2 = await getPlayer(2);
+    let player3 = await getPlayer(3);
+    let player4 = await getPlayer(4);
+    let player5 = await getPlayer(5);
+    let player6 = await getPlayer(6);
+    let column1 = await createPeopleBoxes(player1, player2, player3);
+    let column2 = await createPeopleBoxes(player4, player5, player6);
     console.log('after');
     $('.columns').append(column1);
     $('.columns').append(column2);
