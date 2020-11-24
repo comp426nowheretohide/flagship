@@ -18,6 +18,7 @@ async function getWinner() {
 
 let winner = getWinner().data.won;
 
+
 function renderWinner() {
     let html = `<section class="hero is-fullheight">
                     <div class="hero-body has-text-centered">
@@ -27,9 +28,9 @@ function renderWinner() {
                         <div class='columns is-mobile is-centered'> 
                             <div class='column is-4'> 
                             <div class='has-text-centered'> 
-                                <a href = LoginSignUp/login.html class="button is-warning" id='btn' style="font-weight: bold"> 
+                                <button class="button is-warning" id='btn' style="font-weight: bold"> 
                                 Return to Lobby
-                                </a> 
+                                </button> 
                         </div> 
                         </div>
                     </div>
