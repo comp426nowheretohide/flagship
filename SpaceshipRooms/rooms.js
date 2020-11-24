@@ -17,7 +17,7 @@ let createRoom = (name) => {
     let roomName = $(`<h1 class= "hero is-centered">${name}</name>`);
     box.append(roomName);
     //This is where we would display how many players are in the room
-    box.append(`<h4 style = "font-size: 75px" class= "mb-4" id="${name}">0</h6>`);
+    box.append(`<h4 style = "font-size: 75px" class= "mb-4" id="${name}Count">0</h4>`);
     let enterButton = $(`<button class = "button is-dark enter" id="${name}">Enter</button>`);
     enterButton.on('click', (event) => {
         //send choice to backend and update the number with new total of players from backend;
@@ -73,8 +73,20 @@ let chooseRoom = async function (roomName) {
     return result;
 }
 
+let getRooms = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/rooms`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
 
 let getTotals = async function() {
+    let rooms = await getRooms();
     let countedRooms = rooms.reduce(function (allRooms, room) { 
         if (room in allRooms) {
           allRooms[room]++;
@@ -85,8 +97,18 @@ let getTotals = async function() {
         return allRooms;
     });
 
+    $('#ElectricalCount').html(`${countedRooms['Electrical']}`);
+    $('#EngineCount').html(`${countedRooms['Engine']}`);
+    $('#CafeteriaCount').html(`${countedRooms['Cafeteria']}`);
+    $('#ObservatoryCount').html(`${countedRooms['Observatory']}`);
+    $('#CockpitCount').html(`${countedRooms['Cockpit']}`);
+    $('#DefenseCount').html(`${countedRooms['Defense']}`);
 
 }
+
+setInterval(async ()=>{
+    await getTotals();
+}, 2000);
 
 //I'm thinking :
 //Observatory: Memory

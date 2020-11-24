@@ -284,7 +284,12 @@ setTimeout(async function() {
             //let rooms = await getRooms();
             let killRoom = await getKillRoom();
             message.addClass('has-text-success');
-            message.html(`Clue: Someone died in the ${killRoom}.`);
+            if(killRoom == 0){
+                message.html(`Imposter chose not to kill.`);
+            }
+            else{
+                message.html(`Clue: Someone died in the ${killRoom}.`);
+            }
         }
         else{
             message.html('No clues discovered.');
