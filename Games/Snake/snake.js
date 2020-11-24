@@ -243,6 +243,10 @@ let getKillRoom = async function () {
     return result.data;
 }
 
+let timerInterval = setInterval(function() {
+    document.getElementById("time").innerHTML = time--;
+}, 1000)
+
 setTimeout(async function() {
     clearInterval(timerInterval);
     setTimeout(()=>{
@@ -267,9 +271,5 @@ setTimeout(async function() {
             message.html('No clues discovered.');
         }
     }
-    body.append(message);
+    $('body').append(message);
 }, 60000);
-
-setInterval(function() {
-    document.getElementById("time").innerHTML = time--;
-}, 1000)

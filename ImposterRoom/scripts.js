@@ -32,7 +32,6 @@ let getImposterRoom = async () => {
         }
     }
 }
-getImposterRoom();
 
 let createHeader = async ()=>{
     await getImposterRoom();

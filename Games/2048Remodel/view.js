@@ -238,6 +238,6 @@ setTimeout(async function () {
             message.html('No clues discovered.');
         }
     }
-    body.append(message);
+    $('body').append(message);
 
 }, 60000);

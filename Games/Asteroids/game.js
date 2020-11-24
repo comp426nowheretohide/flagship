@@ -134,6 +134,10 @@ let runGame = setInterval(generateAsteroid, speed + 50);
 
 let time = 59
 
+let timerInterval = setInterval(function() {
+    document.getElementById("time").innerHTML = time--;
+}, 1000)
+
 setTimeout(async function() {
     clearInterval(timerInterval);
     setTimeout(()=>{
@@ -161,10 +165,6 @@ setTimeout(async function() {
         }
         
     }
-    body.append(message);
+    $('body').append(message);
 
 }, 60000);
-
-let timerInterval = setInterval(function() {
-    document.getElementById("time").innerHTML = time--;
-}, 1000)
