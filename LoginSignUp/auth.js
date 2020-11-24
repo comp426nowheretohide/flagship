@@ -40,7 +40,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         console.log("user is signed in!");
         console.log(auth.currentUser);
-        sessionStorage.setItem("authToken", auth.currentUser._lat)
+        sessionStorage.setItem("authToken", auth.currentUser.getIDToken(true))
         console.log(sessionStorage.authToken)
         location.replace('../Lobby/index.html')
     } else {
