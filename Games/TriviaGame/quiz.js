@@ -1,4 +1,4 @@
-let idToken = sessionStorage.authToken;
+let idToken = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
 
 let quizQuestions = [

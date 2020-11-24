@@ -5,7 +5,7 @@ const snake_border = 'chartreuse';
 const food_col = 'white';
 const food_border = 'red';
 
-let idToken = sessionStorage.authToken;
+let idToken = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
 
 let dx = 10;

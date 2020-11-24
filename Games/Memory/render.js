@@ -6,7 +6,7 @@ var firstMove;
 let canClick = false;
 let flips = 10;
 let pString = `<p class="has-text-danger is-size-4">You've got ${flips} flips left.</p>`;
-let idToken = sessionStorage.authToken;
+let idToken = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
 
 export const renderGameBoard = function(game) {

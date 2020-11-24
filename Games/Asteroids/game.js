@@ -4,7 +4,7 @@ document.body.style.cursor = 'Asteroid.png';
 
 let speed = 1500;
 let count = 0;
-let idToken = sessionStorage.authToken;
+let idToken = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
 
 $(document).ready(() => {

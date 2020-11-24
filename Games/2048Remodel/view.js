@@ -1,7 +1,7 @@
 import Game from './engine/game.js'
 
 let game = new Game(4)
-let idToken = sessionStorage.authToken;
+let idToken = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
 
 const renderBoard = function () {
