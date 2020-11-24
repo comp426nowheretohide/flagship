@@ -265,10 +265,10 @@ setTimeout(async function() {
     else if(taskCompleted){
         let random = Math.random();
         if(random > .4){
-            let rooms = await getRooms();
+            //let rooms = await getRooms();
             let killRoom = await getKillRoom();
             message.addClass('has-text-success');
-            message.html(`Clue: Someone died in the ${rooms[killRoom]}.`);
+            message.html(`Clue: Someone died in the ${killRoom}.`);
         }
         else{
             message.html('No clues discovered.');
