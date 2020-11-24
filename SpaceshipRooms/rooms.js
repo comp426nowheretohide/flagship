@@ -24,22 +24,22 @@ let createRoom = (name) => {
         $('.enter').remove();
         if(event.currentTarget.id == "Electrical") {
             chooseRoom("Electrical");
-            location.replace("../Games/TriviaGame/index.html");
+            // location.replace("../Games/TriviaGame/index.html");
         } else if(event.currentTarget.id == "Engine") {
             chooseRoom("Engine");
-            location.replace("../Games/2048Remodel/index.html");
+            // location.replace("../Games/2048Remodel/index.html");
         } else if(event.currentTarget.id == "Cafeteria") {
             chooseRoom("Cafeteria");
-            location.replace("../Games/Snake/index.html");
+            // location.replace("../Games/Snake/index.html");
         } else if(event.currentTarget.id == "Observatory") {
             chooseRoom("Observatory");
-            location.replace("../Games/Memory/index.html");
+            // location.replace("../Games/Memory/index.html");
         } else if(event.currentTarget.id == "Cockpit") {
             chooseRoom("Cockpit");
-            location.replace("../Games/DinosaurRemaster/index.html");
+            // location.replace("../Games/DinosaurRemaster/index.html");
         } else if(event.currentTarget.id == "Defense") {
             chooseRoom("Defense");
-            location.replace("../Games/Asteroids/index.html");
+            // location.replace("../Games/Asteroids/index.html");
         }
     });
     box.append(enterButton);
