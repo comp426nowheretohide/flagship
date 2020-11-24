@@ -43,6 +43,7 @@ let createGame = async function(name, id){
         sessionStorage.setItem("gameId", result.data.gameId)
         sessionStorage.setItem("currentUser", result.data.user1)
         console.log("Registered game ID: " + sessionStorage.gameId + " as user: " + sessionStorage.currentUser)
+        location.replace('../WaitingRoom/index.html')
         return result;
     }
     catch(error){

@@ -1,5 +1,7 @@
-let idToken = sessionStorage.gameID;
+let idToken = sessionStorage.authToken;
+let gameID = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
+let base = sessionStorage.base;
 
 let quizQuestions = [
     {
@@ -481,7 +483,7 @@ function showResults(questions, quiz, result){
             result.innerHTML = "ERR: System Failure ! Task failed! ";
             failed = true;
             //send failure to backend
-            sendTaskResult(currUser, idToken, 0);
+            sendTaskResult(currUser, gameID, 0);
         } 
         else if(failed){
             result.style.color = 'green';
@@ -491,7 +493,7 @@ function showResults(questions, quiz, result){
             result.style.color = 'green';
             result.innerHTML = "System calibrated correctly! Task completed!";
             //send success to backend
-            sendTaskResult(currUser, idToken, 1);
+            sendTaskResult(currUser, gameID, 1);
         }
     }
 }
@@ -534,25 +536,103 @@ function renderQuestions(questions, quiz) {
 
 }
 
-let base = '';
-
 let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
     const result = await axios({
         method: 'post', 
         url:`${base}/minigame/${gameID}/${name}/${score}`,
         headers: {
-            authorization: `bearer ${gameID}`,
+            authorization: `bearer ${idToken}`,
         }, 
         withCredentials: true
     })
+    return result;
 
 }
 
+let isPlayerAlive = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameID}/${currUser}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getImposter = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/aliveI`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getMinigame = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/minigame`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getPlayer = async function (id) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/user${id}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
 setTimeout(function() {
-    location.replace("../../VotingAndChat/index.html")
+    clearInterval(timerInterval);
+    setTimeout(()=>{
+        location.replace("../../VotingAndChat/index.html");
+    }, 10000);
+    let isAlive = await isPlayerAlive();
+    $('body').empty();
+    let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
+    if (!isAlive) {
+        let imposterResult = await getImposter();
+        message.addClass('has-text-danger');
+        message.html(`You were stabbed to death by ${imposterResult}.`);
+    }
+    else {
+        let random = Math.random();
+        if (random > .5) {
+            message.addClass('has-text-success');
+            let playersMinigamesCompleted = await getMinigame();
+            let randomIndex = (int) (Math.random() * playersMinigamesCompleted.length);
+            let player = await getPlayer(id + 1);
+            if (playersMinigamesCompleted[randomIndex] == 1) {
+                message.html(`Clue: ${player} completed their task.`);
+            }
+            else {
+                message.html(`Clue: ${player} did not complete a task.`);
+            }
+        }
+        else{
+            message.html('No clues discovered.');
+        }
+    }
+    body.append(message);
+
 }, 60000);
 
-setInterval(function() {
+let timerInterval = setInterval(function() {
     document.getElementById("time").innerHTML = time--;
 }, 1000)

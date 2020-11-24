@@ -97,11 +97,11 @@ let isAlive = setInterval(()=>{
         }
         else{
             $('p').html(`You crashed the ship into an asteroid! ${lives} lives left.`);
+            setTimeout(restart, 2000);
         }
         $('#asteroid').remove();
         $('#asteroid2').remove();
         clearInterval(runGame);
-        setTimeout(restart, 2000);
     }
 }, 10);
 
@@ -118,13 +118,20 @@ document.addEventListener('keydown', (evt) => {
     }
 });
 
-let base = '';
+let idToken = sessionStorage.authToken;
+let gameID = sessionStorage.gameID;
+let currUser = sessionStorage.currentUser;
+let base = sessionStorage.base;
 
 let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
     const result = await axios({
         method: 'post', 
-        url:`${base}/minigame/${gameID}/${name}/${score}`
+        url:`${base}/minigame/${gameID}/${name}/${score}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
     })
     return result;
 
@@ -134,8 +141,93 @@ const returnToLobby = function() {
     location.replace("../../SpaceshipRooms/index.html")
 }
 
-setTimeout(function() {
-    location.replace("../../VotingAndChat/index.html")
+setTimeout(function(){
+    if(lives > 0){
+        sendTaskResult(currUser, gameID, 1);
+        $('p').removeClass('has-text-danger');
+        $('p').addClass('has-text-success');
+        $('p').html('Task Completed');
+    }
+}, 59000)
+
+let isPlayerAlive = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameID}/${currUser}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getImposter = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/aliveI`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getPlayer = async function (id) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/user${id}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getRooms = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/rooms`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+setTimeout(async function() {
+    clearInterval(timerInterval);
+    setTimeout(()=>{
+        location.replace("../../VotingAndChat/index.html");
+    }, 10000);
+    let isAlive = await isPlayerAlive();
+    $('body').empty();
+    let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
+    let imposterResult = await getImposter();
+    if (!isAlive) {
+        message.addClass('has-text-danger');
+        message.html(`You were stabbed to death by ${imposterResult}.`);
+    }
+    else {
+        let random = Math.random();
+        if (random > .3) {
+            message.addClass('has-text-success');
+            let playersRooms = await getRooms();
+            for(let i = 0; i < 6; i++){
+                let player = await getPlayer(i+1);
+                if(player == imposterResult){
+                    message.html(`Clue: The imposter was in the ${playersRooms[i]}`);
+                }
+            }
+        }
+        else{
+            message.html('No clues discovered.');
+        }
+    }
+    body.append(message);
 }, 60000);
 
 setInterval(function() {
