@@ -598,7 +598,7 @@ let getPlayer = async function (id) {
     return result.data;
 }
 
-setTimeout(function() {
+setTimeout(async function() {
     clearInterval(timerInterval);
     setTimeout(()=>{
         location.replace("../../VotingAndChat/index.html");

@@ -316,7 +316,7 @@ setTimeout(function () {
     body.append(message);
 }, 60000);
 
-let timeInterval = setInterval(function () {
+let timerInterval = setInterval(function () {
     document.getElementById("time").innerHTML = time--;
 }, 1000)
 
