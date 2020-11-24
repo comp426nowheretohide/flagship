@@ -12,11 +12,11 @@ async function getWinner() {
         },
         withCredentials: true,
     })
-    return result;
+    return result.data;
 }
 
 
-let winner = getWinner().data.won;
+let winner = getWinner();
 
 
 function renderWinner() {
