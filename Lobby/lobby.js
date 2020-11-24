@@ -63,7 +63,9 @@ let joinGame = async function(name, id){
             withCredentials: true,
         })
         console.log(result.data)
-        // location.replace('../WaitingRoom/index.html')
+        sessionStorage.setItem("gameId", id)
+        sessionStorage.setItem("currentUser", name)
+        location.replace('../WaitingRoom/index.html')
         return result;
     }
     catch(error){
