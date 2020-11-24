@@ -17,7 +17,7 @@ let createRoom = (name) => {
     let roomName = $(`<h1 class= "hero is-centered">${name}</name>`);
     box.append(roomName);
     //This is where we would display how many players are in the room
-    box.append(`<h4 style = "font-size: 75px" class= "mb-4" id="${name}Count">0</h4>`);
+    //box.append(`<h4 style = "font-size: 75px" class= "mb-4" id="${name}Count">0</h4>`);
     let enterButton = $(`<button class = "button is-dark enter" id="${name}">Enter</button>`);
     enterButton.on('click', (event) => {
         //send choice to backend and update the number with new total of players from backend;
@@ -84,7 +84,7 @@ let getRooms = async function () {
     })
     return result.data;
 }
-
+/*
 let getTotals = async function() {
     let rooms = await getRooms();
     let countedRooms = rooms.reduce(function (allRooms, room) { 
@@ -108,7 +108,7 @@ let getTotals = async function() {
 
 setInterval(async ()=>{
     await getTotals();
-}, 2000);
+}, 2000);*/
 
 //I'm thinking :
 //Observatory: Memory
@@ -149,7 +149,7 @@ let isPlayerAlive = async function () {
 setTimeout(async function () {
     let imposter = await getImposter();
     let isAlive = await isPlayerAlive();
-    if(isAlive){
+    if(!isAlive){
         location.replace("../Dead/index.html");
     } else if (imposter == currUser) {
         location.replace("../ImposterRoom/index.html");
