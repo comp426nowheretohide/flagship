@@ -205,6 +205,18 @@ let timerInterval = setInterval(function() {
     document.getElementById("time").innerHTML = time--;
 }, 1000)
 
+let getLastPlayerKilled = async function (id) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/lastKilled`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
 setTimeout(async function() {
     clearInterval(timerInterval);
     setTimeout(()=>{
@@ -214,9 +226,14 @@ setTimeout(async function() {
     $('body').empty();
     let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
     let imposterResult = await getImposter();
+    let isLastKilled = await getLastPlayerKilled();
+    $('body').empty();
+    let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
     if (!isAlive) {
-        message.addClass('has-text-danger');
-        message.html(`You were stabbed to death by ${imposterResult}.`);
+        if(isLastKilled == currUser){
+            message.addClass('has-text-danger');
+            message.html(`You were stabbed to death by ${imposterResult}.`);
+        }
     }
     else if(taskCompleted) {
         let random = Math.random();
