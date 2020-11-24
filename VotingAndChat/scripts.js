@@ -93,21 +93,20 @@ let beginEjection = async function () {
     setTimeout(async () => {
         $('body').empty();
         let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
- /*       let ejectedPlayer = await lastEjected();
-        if (ejectedPlayer == '') {
-            message.html('No one was ejected.');
-        }
-        else {
-            message.html(`${ejectedPlayer} was ejected.`);
-        }*/
-        $('body').append(message);
+        //let ejectedPlayer = await lastEjected();
+        //if (ejectedPlayer == '') {
+        //    message.html('No one was ejected.');
+        //}
+        //else {
+        //    message.html(`${ejectedPlayer} was ejected.`);
+        //}
+        //$('body').append(message);
         let res = await generateNewRound();
         let gameWon = res["won"];
-        setTimeout(async ()=>{
-            if(gameWon == "false"){
-                message.html('The imposter is still at large');
-            }
-        }, 1000);
+        if(gameWon=="false"){
+            message.html("The imposter is still around");
+        }
+        $('body').append(message);
         setTimeout(async () => {
             if (gameWon == "false") {
                 location.replace('../SpaceshipRooms/index.html');
@@ -246,7 +245,6 @@ setTimeout(async () => {
         let player = await getPlayer(i);
         $(`#p${player}`).html(`${player} voted for ${votes[i]}.`);
     }
-
     setTimeout(async () => {
         await beginEjection();
     }, 3000);
