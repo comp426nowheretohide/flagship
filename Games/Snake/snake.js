@@ -20,6 +20,8 @@ let time = 59;
 
 let score = 0;
 
+let taskCompleted = false;
+
 let snake = [
     {x: 200, y: 200},
     {x: 190, y: 200},
@@ -162,6 +164,7 @@ function hasWon() {
         $('p').addClass('has-text-success');
         $('#score').addClass('has-text-success');
         //send successful result to backend
+        taskCompleted = true;
         sendTaskResult(currUser, gameID, 1);
     }
 }
@@ -259,7 +262,7 @@ setTimeout(async function() {
         let imposterResult = await getImposter();
         message.html(`You were stabbed to death by ${imposterResult}.`);
     }
-    else {
+    else if(taskCompleted){
         let random = Math.random();
         if(random > .4){
             let rooms = await getRooms();
@@ -270,6 +273,10 @@ setTimeout(async function() {
         else{
             message.html('No clues discovered.');
         }
+    }
+    else {
+        message.addClass('has-text-danger');
+        message.html('You failed your task.');
     }
     $('body').append(message);
 }, 60000);

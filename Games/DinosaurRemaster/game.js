@@ -8,6 +8,8 @@ let lives = 3;
 
 let time = 59;
 
+let taskCompleted = false;
+
 let animate = (animation) => {
     if (document.getElementById('spaceship').classList.length === 0) {
         ship.addClass(animation);
@@ -143,6 +145,7 @@ const returnToLobby = function() {
 
 setTimeout(function(){
     if(lives > 0){
+        taskCompleted = true;
         sendTaskResult(currUser, gameID, 1);
         $('p').removeClass('has-text-danger');
         $('p').addClass('has-text-success');
@@ -215,7 +218,7 @@ setTimeout(async function() {
         message.addClass('has-text-danger');
         message.html(`You were stabbed to death by ${imposterResult}.`);
     }
-    else {
+    else if(taskCompleted) {
         let random = Math.random();
         if (random > .3) {
             message.addClass('has-text-success');
@@ -230,6 +233,10 @@ setTimeout(async function() {
         else{
             message.html('No clues discovered.');
         }
+    }
+    else {
+        message.addClass('has-text-danger');
+        message.html('You failed your task.');
     }
     $('body').append(message);
 }, 60000);

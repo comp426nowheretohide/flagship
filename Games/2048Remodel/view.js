@@ -6,6 +6,8 @@ let gameID = sessionStorage.gameId;
 let currUser = sessionStorage.currentUser;
 let base = sessionStorage.base;
 
+let taskCompleted = false;
+
 const renderBoard = function () {
     // Grab a jQuery reference to the root HTML element
     const $root = $('#root');
@@ -46,6 +48,7 @@ const renderBoard = function () {
             checker.addClass('victory');
             checker.append(`<p class="is-size-4 has-text-success">You've generated enough power for the engine! Task completed.</p>`);
             //send completed task to backend;
+            taskCompleted = true;
             sendTaskResult(currUser, gameID, 1);
         }
     })
@@ -220,7 +223,7 @@ setTimeout(async function () {
         message.addClass('has-text-danger');
         message.html(`You were stabbed to death by ${imposterResult}.`);
     }
-    else {
+    else if(taskCompleted) {
         let random = Math.random();
         if (random > .5) {
             message.addClass('has-text-success');
@@ -237,6 +240,10 @@ setTimeout(async function () {
         else{
             message.html('No clues discovered.');
         }
+    }
+    else {
+        message.addClass('has-text-danger');
+        message.html('You failed your task.');
     }
     $('body').append(message);
 

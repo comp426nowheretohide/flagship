@@ -404,6 +404,8 @@ let quizQuestions = [
     },
 ]
 
+let taskCompleted = false;
+
 let randQuiz = questionSelector();
 
 let failed = false;
@@ -493,6 +495,7 @@ function showResults(questions, quiz, result){
             result.style.color = 'green';
             result.innerHTML = "System calibrated correctly! Task completed!";
             //send success to backend
+            taskCompleted = true;
             sendTaskResult(currUser, gameID, 1);
         }
     }
@@ -615,7 +618,7 @@ setTimeout(async function() {
         message.addClass('has-text-danger');
         message.html(`You were stabbed to death by ${imposterResult}.`);
     }
-    else {
+    else if(taskCompleted) {
         let random = Math.random();
         if (random > .5) {
             message.addClass('has-text-success');
@@ -633,7 +636,10 @@ setTimeout(async function() {
             message.html('No clues discovered.');
         }
     }
-    
+    else {
+        message.addClass('has-text-danger');
+        message.html('You failed your task.');
+    }
     $('body').append(message);
 
 }, 60000);

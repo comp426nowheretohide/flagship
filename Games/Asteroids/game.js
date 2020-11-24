@@ -8,6 +8,8 @@ let gameID = sessionStorage.gameId;
 let currUser = sessionStorage.currentUser;
 let base = sessionStorage.base;
 
+let taskCompleted = false;
+
 $(document).ready(() => {
     asteroids.on('click', () => {
         count++;
@@ -17,6 +19,7 @@ $(document).ready(() => {
             $('p').html('Task completed successfully');
 
             //send task completed to backend
+            taskCompleted = true;
             sendTaskResult(currUser, gameID, 1);
         }
         else {
@@ -150,7 +153,7 @@ setTimeout(async function() {
         let imposterResult = await getImposter();
         message.html(`You were stabbed to death by ${imposterResult}.`);
     }
-    else {
+    else if(taskCompleted) {
         let random = Math.random();
         if(random > .7){
             let playersRooms = await getRooms();
@@ -163,7 +166,10 @@ setTimeout(async function() {
         else{
             message.html('No clues discovered.');
         }
-        
+    }
+    else {
+        message.addClass('has-text-danger');
+        message.html('You failed your task.');
     }
     $('body').append(message);
 

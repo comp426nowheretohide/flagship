@@ -10,6 +10,7 @@ let idToken = sessionStorage.authToken;
 let gameID = sessionStorage.gameId;
 let currUser = sessionStorage.currentUser;
 let base = sessionStorage.base;
+let taskCompleted = false;
 
 export const renderGameBoard = function (game) {
     return `
@@ -210,6 +211,7 @@ export const loadIntoDOM = function () {
                     loadImages();
                     showMatched();
                     //Send successful result to backend
+                    taskCompleted = true;
                     sendTaskResult(currUser, gameID, 1);
                 }
             }, 3000)
@@ -289,7 +291,7 @@ setTimeout(async function () {
         message.addClass('has-text-danger');
         message.html(`You were stabbed to death by ${imposterResult}.`);
     }
-    else {
+    else if(taskCompleted) {
         let random = Math.random();
         if (random > .5) {
             message.addClass('has-text-success');
@@ -316,6 +318,10 @@ setTimeout(async function () {
         else {
             message.html('No clues discovered.');
         }
+    }
+    else {
+        message.addClass('has-text-danger');
+        message.html('You failed your task.');
     }
     $('body').append(message);
 }, 60000);
