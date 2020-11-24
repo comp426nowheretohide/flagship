@@ -5,8 +5,13 @@ let currUser = sessionStorage.currentUser;
 
 let voteButtonsActive = false;
 
+let currUserAlive = null;
+let setCurrUserAlive = async ()=>{
+    currUserAlive = await isPlayerAlive(currUser);
+}
+setCurrUserAlive();
+
 let createPeopleBox = async (vote) => {
-    console.log('peopleBox called');
     let box = $(`<div class = "box player" id= "${vote}"></div>`);
     let field = $(`<div class = "field level"></div>`);
     let p = $(`<p id = "p${vote}">${vote}</p>`);
@@ -22,7 +27,7 @@ let createPeopleBox = async (vote) => {
         field.append($(`<button class = "button is-small" style = "visibility:hidden"></button>`));
         field.append(btns);
         box.on('click', () => {
-            if (!voteButtonsActive) {
+            if (!voteButtonsActive && currUserAlive) {
                 let voteBtn = $('<button class="button is-success is-inline is-small level-item">✔</button>');
                 let cancelBtn = $('<button class="button is-danger is-inline is-small level-item">✘</button>');
                 voteBtn.on('click', () => {
