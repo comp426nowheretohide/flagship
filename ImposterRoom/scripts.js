@@ -102,7 +102,7 @@ let createPeopleBoxes = async () => {
 
 let killPlayer = async function (player) {
     const result = await axios({
-        method: 'post',
+        method: 'delete',
         url: `${base}/kill/${gameID}/${player}`,
         headers: {
             authorization: `bearer ${idToken}`,
