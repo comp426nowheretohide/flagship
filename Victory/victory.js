@@ -4,6 +4,7 @@ let base = sessionStorage.base;
 
 
 async function getWinner() {
+    try{
     const result = await axios({
         method: 'get',
         url: `${base}/games/${gameId}/won`,
@@ -14,10 +15,14 @@ async function getWinner() {
     })
     return result.data;
 }
+catch(e){
+    //show error
+}
+}
 
-let winner = getWinner();
 
-function renderWinner() {
+async function renderWinner() {
+    let winner = await getWinner();
     let html = `<section class="hero is-fullheight">
                     <div class="hero-body has-text-centered">
                         <div class="container">
@@ -37,6 +42,13 @@ function renderWinner() {
                 </section>`
     let $root = $(`#root`);
     $root.append(html);
+    $('#btn').on("click",redirect());
 }
+
+function redirect(event){
+    event.preventDefault();
+    location.replace('../Lobby/index.html')
+}
+
 
 renderWinner();
