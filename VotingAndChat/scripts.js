@@ -168,12 +168,13 @@ let createPeopleBoxes = async (x1, x2, x3) => {
 
 let createPlayerBoxes = async () => {
     console.log('before');
-    let column1 = createPeopleBoxes(await getPlayer(0), await getPlayer(1), await getPlayer(2));
-    let column2 = createPeopleBoxes(await getPlayer(3), await getPlayer(4), await getPlayer(5));
+    let column1 = createPeopleBoxes(await getPlayer(1), await getPlayer(2), await getPlayer(3));
+    let column2 = createPeopleBoxes(await getPlayer(4), await getPlayer(5), await getPlayer(6));
     console.log('after');
     $('.columns').append(column1);
     $('.columns').append(column2);
 }
+
 createPlayerBoxes();
 
 let getVotes = async function () {
