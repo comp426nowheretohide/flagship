@@ -31,7 +31,7 @@ let createPeopleBox = (vote) =>{
     return box;
 }
 
-let base = '';
+let base = sessionStorage.base;
 
 let votePlayer = async function(player, gameID, vote){
     const result = await axios({
