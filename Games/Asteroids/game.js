@@ -4,7 +4,7 @@ let speed = 1500;
 let count = 0;
 
 let idToken = sessionStorage.authToken;
-let gameID = sessionStorage.gameID;
+let gameID = sessionStorage.gameId;
 let currUser = sessionStorage.currentUser;
 let base = sessionStorage.base;
 
@@ -162,7 +162,7 @@ setTimeout(async function() {
         
     }
     body.append(message);
-    
+
 }, 60000);
 
 let timerInterval = setInterval(function() {

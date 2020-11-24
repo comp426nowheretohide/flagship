@@ -1,6 +1,11 @@
 
 let voteButtonsActive = false;
 
+let idToken = sessionStorage.authToken;
+let gameID = sessionStorage.gameId;
+let currUser = sessionStorage.currentUser;
+let base = sessionStorage.base;
+
 $('.container').prepend('<h2 class="hero is-size-3 has-text-danger">But you have more sinister plans...</h2>');
 
 let room = 'test-room'; //Get the room the imposter is in from the backend
@@ -47,12 +52,14 @@ let createPeopleBoxes = () =>{
     return column;
 }
 
-let base = '';
-
 let killPlayer = async function(player, gameID){
     const result = await axios({
         method: 'post', 
-        url:`${base}/kill/${gameID}/${player}`
+        url:`${base}/kill/${gameID}/${player}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
     })
     return result;
 }

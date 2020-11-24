@@ -6,7 +6,7 @@ const food_col = 'white';
 const food_border = 'red';
 
 let idToken = sessionStorage.authToken;
-let gameID = sessionStorage.gameID;
+let gameID = sessionStorage.gameId;
 let currUser = sessionStorage.currentUser;
 let base = sessionStorage.base;
 

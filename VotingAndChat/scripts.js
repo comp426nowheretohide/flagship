@@ -5,38 +5,44 @@ let currUser = sessionStorage.currUser;
 
 let voteButtonsActive = false;
 
-let createPeopleBox = (vote) =>{
+let createPeopleBox = async (vote) => {
     let box = $(`<div class = "box player" id= "${vote}"></div>`);
     let field = $(`<div class = "field level"></div>`);
     let p = $(`<p id = "#p${vote}">${vote}</p>`);
     let btns = $('<div class = "buttons level-right"></div>');
+    let isAlive = await isPlayerAlive(vote);
     field.append(p);
-    field.append($(`<button class = "button is-small" style = "visibility:hidden"></button>`));
-    field.append($(`<button class = "button is-small" style = "visibility:hidden"></button>`));
-    box.append(field);
-    field.append(btns);
-    box.on('click', ()=>{
-        if(!voteButtonsActive){
-            let voteBtn = $('<button class="button is-success is-inline is-small level-item">✔</button>');
-            let cancelBtn = $('<button class="button is-danger is-inline is-small level-item">✘</button>');
-            voteBtn.on('click',()=>{
-                //send vote to backend                
-                votePlayer(vote);
-                btns.empty();
-            })
-            cancelBtn.on('click',()=>{
-                btns.empty();
-                setTimeout(()=> voteButtonsActive = false, 10);
-            })
-            btns.append(voteBtn);
-            btns.append(cancelBtn);
-            voteButtonsActive = true;
-        }
-    })
+    if (!isAlive) {
+        p.addClass('has-text-danger');
+    }
+    else {
+        field.append($(`<button class = "button is-small" style = "visibility:hidden"></button>`));
+        field.append($(`<button class = "button is-small" style = "visibility:hidden"></button>`));
+        box.append(field);
+        field.append(btns);
+        box.on('click', () => {
+            if (!voteButtonsActive) {
+                let voteBtn = $('<button class="button is-success is-inline is-small level-item">✔</button>');
+                let cancelBtn = $('<button class="button is-danger is-inline is-small level-item">✘</button>');
+                voteBtn.on('click', () => {
+                    //send vote to backend                
+                    votePlayer(vote);
+                    btns.empty();
+                })
+                cancelBtn.on('click', () => {
+                    btns.empty();
+                    setTimeout(() => voteButtonsActive = false, 10);
+                })
+                btns.append(voteBtn);
+                btns.append(cancelBtn);
+                voteButtonsActive = true;
+            }
+        })
+    }
     return box;
 }
 
-let votePlayer = async function(votedFor){
+let votePlayer = async function (votedFor) {
     const result = await axios({
         method: 'put',
         url: `${base}/vote/${gameId}/${currUser}/${votedFor}`,
@@ -47,7 +53,7 @@ let votePlayer = async function(votedFor){
     })
     return result;
 }
-
+/*
 //should return an array of living players (to be added to the boxes)
 let getAlivePlayers = async function() {
     const result = await axios({
@@ -59,15 +65,15 @@ let getAlivePlayers = async function() {
         withCredentials: true,
     })
     return result;
-}
+}*/
 
-let beginEjection = async function() {
+let beginEjection = async function () {
     let theHost = await host();
-    setTimeout(async ()=>{
+    setTimeout(async () => {
         $('body').empty();
         let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
         let ejectedPlayer = await lastEjected();
-        if(ejectedPlayer == ''){
+        if (ejectedPlayer == '') {
             message.html('No one was ejected.');
         }
         else {
@@ -75,34 +81,34 @@ let beginEjection = async function() {
         }
         $('body').append(message);
         let gameWon = await checkIfWon();
-        setTimeout(()=>{
-            if(gameWon){
+        setTimeout(() => {
+            if (gameWon) {
                 location.replace('../Victory/index.html');
             }
-            else{
+            else {
                 location.replace('../SpaceshipRooms/index.html');
             }
-        },5000);
+        }, 5000);
     }, 2000)
-    if(theHost == currUser){
+    if (theHost == currUser) {
         await ejectPlayer();
     }
 }
 
 //initiates ejection process
-let ejectPlayer = async function() {
-    const result = await axios ({
-        method: 'post', 
+let ejectPlayer = async function () {
+    const result = await axios({
+        method: 'post',
         url: `${base}/eject/${gameId}`,
         headers: {
             authorization: `bearer ${idToken}`
-        }, 
+        },
         withCredentials: true,
     })
     return result;
 }
 
-let lastEjected = async function(){
+let lastEjected = async function () {
     const result = await axios({
         method: 'get',
         url: `${base}/games/${gameId}/lastEjected`,
@@ -114,7 +120,7 @@ let lastEjected = async function(){
     return result.data;
 }
 
-let host = async function(){
+let host = async function () {
     const result = await axios({
         method: 'get',
         url: `${base}/games/${gameId}/user1`,
@@ -127,7 +133,7 @@ let host = async function(){
 }
 
 //should return 'false' for no winner, 'crew' if crew won, and 'imposter' if imposter won
-let checkIfWon = async function() {
+let checkIfWon = async function () {
     const result = await axios({
         method: 'get',
         url: `${base}/games/${gameId}/won`,
@@ -136,10 +142,10 @@ let checkIfWon = async function() {
         },
         withCredentials: true,
     })
-    return result.data; 
+    return result.data;
 }
 
-let createPeopleBoxes = (x1, x2, x3) =>{
+let createPeopleBoxes = async (x1, x2, x3) => {
     let column = $('<div class = "column">');
     column.append(createPeopleBox(x1));
     column.append(createPeopleBox(x2));
@@ -147,19 +153,31 @@ let createPeopleBoxes = (x1, x2, x3) =>{
     return column;
 }
 
-let createPlayerBoxes = async () =>{
+let createPlayerBoxes = async () => {
     let column1 = createPeopleBoxes(await getPlayer(0), await getPlayer(1), await getPlayer(2));
     let column2 = createPeopleBoxes(await getPlayer(3), await getPlayer(4), await getPlayer(5));
     $('.columns').append(column1);
     $('.columns').append(column2);
 }
 
-let getVotes = async function() {
+let getVotes = async function () {
     const result = await axios({
         method: 'get',
         url: `${base}/games/${gameId}/vote`,
         headers: {
             authorization: `bearer ${idToken}`
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let isPlayerAlive = async function (name) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameID}/${name}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
         },
         withCredentials: true
     })
@@ -185,14 +203,14 @@ let getPlayer = async function (id) {
     return result.data;
 }
 
-setTimeout(async ()=>{
+setTimeout(async () => {
     voteButtonsActive = false;
     let votes = await getVotes();
-    for(let i = 0; i < votes.length; i++){
+    for (let i = 0; i < votes.length; i++) {
         let player = await getPlayer(i);
         $(`#p${player}`).html(`${player} voted for ${votes[i]}.`);
     }
-    setTimeout(()=>{
+    setTimeout(() => {
         beginEjection();
     }, 3000);
 }, 60000);

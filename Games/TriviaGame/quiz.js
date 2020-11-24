@@ -1,5 +1,5 @@
 let idToken = sessionStorage.authToken;
-let gameID = sessionStorage.gameID;
+let gameID = sessionStorage.gameId;
 let currUser = sessionStorage.currentUser;
 let base = sessionStorage.base;
 

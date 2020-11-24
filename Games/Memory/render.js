@@ -7,7 +7,7 @@ let canClick = false;
 let flips = 10;
 let pString = `<p class="has-text-danger is-size-4">You've got ${flips} flips left.</p>`;
 let idToken = sessionStorage.authToken;
-let gameID = sessionStorage.gameID;
+let gameID = sessionStorage.gameId;
 let currUser = sessionStorage.currentUser;
 let base = sessionStorage.base;
 
