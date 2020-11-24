@@ -149,7 +149,7 @@ let isPlayerAlive = async function () {
 setTimeout(async function () {
     let imposter = await getImposter();
     let isAlive = await isPlayerAlive();
-    if(isAlive){
+    if(!isAlive){
         location.replace("../Dead/index.html");
     } else if (imposter == currUser) {
         location.replace("../ImposterRoom/index.html");
