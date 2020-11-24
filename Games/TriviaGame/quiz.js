@@ -353,7 +353,7 @@ let quizQuestions = [
         correct: 'A',
     },
     {
-        question: "What is 38 / 2?",
+        question: "What is 36 / 2?",
         answers: {
             A: '76',
             B: '18',

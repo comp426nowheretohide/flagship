@@ -52,7 +52,7 @@ body{
 
 .answers label {
 	display: inline-block;
-	background-color: paleturquoise;
+	background-color: white;
 	padding: 10px 20px;
 	font-family: sans-serif, Arial;
 	font-size: 16px;
@@ -67,7 +67,7 @@ body{
 }
 
 .answers input[type="radio"]:checked ~* {
-	background-color: palevioletred;
+	background-color: orchid;
 }
 
 label > input[type="radio"]:checked {
