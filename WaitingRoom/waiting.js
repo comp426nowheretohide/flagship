@@ -50,24 +50,28 @@ let idToken = sessionStorage.authToken;
 let base = sessionStorage.base;
 
 setInterval(async function() {
-    const result = await axios({
-        method: 'get',
-        url: `${base}/lobby/${gameId}`,
-        headers: {
-            authorization: `bearer ${idToken}`
-        },
-        withCredentials: true,
-    })
-    let users = new Array(6)
-    for(let i = 0; i < 6; i++) {
-        users[i] = res.data[i];
-    }
-    for(let i = 0; i < 6; i++) {
-        if(users[i] === undefined) {
-            break
-        } else {
-            document.querySelector(`.user${i+1}`).innerHTML = `Player ${i + 1}: ` + users[i]
+    try{
+        const result = await axios({
+            method: 'get',
+            url: `${base}/lobby/${gameId}`,
+            headers: {
+                authorization: `bearer ${idToken}`
+            },
+            withCredentials: true,
+        })
+        let users = new Array(6)
+        for(let i = 0; i < 6; i++) {
+            users[i] = result.data[i];
         }
+        for(let i = 0; i < 6; i++) {
+            if(users[i] === undefined) {
+                break
+            } else {
+                document.querySelector(`.user${i+1}`).innerHTML = `Player ${i + 1}: ` + users[i]
+            }
+        }
+        return result;
+    } catch(error) {
+        console.log("ERROR")
     }
-    return result;
 }, 3000)
