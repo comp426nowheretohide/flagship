@@ -18,7 +18,7 @@ let isPlayerAlive = async function (name) {
 }
 
 let currUserAlive = null;
-let setCurrUserAlive = async ()=>{
+let setCurrUserAlive = async () => {
     currUserAlive = await isPlayerAlive(currUser);
 }
 setCurrUserAlive();
@@ -101,8 +101,8 @@ let beginEjection = async function () {
             message.html(`${ejectedPlayer} was ejected.`);
         }
         $('body').append(message);
-        await generateNewRound();
-        let gameWon = await checkIfWon();
+        let res = await generateNewRound();
+        let gameWon = res["won"];
         setTimeout(async () => {
             if (gameWon == "false") {
                 location.replace('../SpaceshipRooms/index.html');
@@ -111,7 +111,7 @@ let beginEjection = async function () {
                 location.replace('../Victory/index.html');
             }
         }, 5000);
-    }, 2000)
+    }, 3000)
 }
 
 let generateNewRound = async function () {
