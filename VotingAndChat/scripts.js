@@ -82,7 +82,7 @@ let beginEjection = async function () {
         }
         $('body').append(message);
         let gameWon = await checkIfWon();
-        setTimeout(() => {
+        setTimeout(async () => {
             if (gameWon == "false") {
                 await generateNewRound();
                 location.replace('../SpaceshipRooms/index.html');
