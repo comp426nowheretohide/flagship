@@ -8,6 +8,8 @@ let gameBase = sessionStorage.base;
 let time = 29;
 
 
+
+
 let createRoom = (name) => {
     let box = $(`<div class = "box has-text-centered"></box>`);
     box.css('height', '250px');
@@ -57,12 +59,13 @@ let base = '';
 let chooseRoom = async function(roomName){
     const result = await axios({
         method: 'put',
-        url: `${gameBase}/room/${gameId}/${currUser}/${roomName}`,
+        url: `${gameBase}/room/${gameID}/${currUser}/${roomName}`,
         headers: {
             authorization: `bearer ${idToken}`
         },
         withCredentials: true,
     })
+    console.log(result.data)
     return result;
 }
 
@@ -77,6 +80,10 @@ columns.append(createColumn('Electrical','Engine'));
 columns.append(createColumn('Cafeteria', 'Observatory'));
 columns.append(createColumn('Cockpit','Defense'));
 display.append(columns);
+
+// setTimeout(function() {
+//     location.replace('../Games/Snake/index.html')
+// }, 30000)
 
 setInterval(function() {
     document.getElementById("time").innerHTML = time--;
