@@ -76,7 +76,22 @@ setInterval(async function() {
             }
         }
         if(users[5] !== undefined) {
-            location.replace('../SpaceshipRooms/index.html')
+            try {
+                const res = await axios({
+                    method: 'post',
+                    url: `${base}/newRound/${gameId}`,
+                    headers: {
+                        authorization: `bearer ${idToken}`
+                    },
+                    withCredentials: true,
+                })
+                console.log(res.data);
+                return res;
+            } catch(error) {
+                console.log("ERROR")
+            }
+            
+            // location.replace('../SpaceshipRooms/index.html')
         }
         return result;
     } catch(error) {
