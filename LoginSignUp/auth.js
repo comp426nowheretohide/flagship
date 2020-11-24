@@ -41,7 +41,7 @@ firebase.auth().onAuthStateChanged(async (user) =>{
         console.log("user is signed in!");
         console.log(auth.currentUser);
         let authToken = await auth.currentUser.getIdToken(true);
-        sessionStorage.setItem("authToken", auth)
+        sessionStorage.setItem("authToken", authToken)
         console.log(sessionStorage.authToken)
         location.replace('../Lobby/index.html')
     } else {
