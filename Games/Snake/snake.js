@@ -240,6 +240,7 @@ let getKillRoom = async function () {
         },
         withCredentials: true
     })
+    return result.data;
 }
 
 setTimeout(function() {
@@ -260,7 +261,7 @@ setTimeout(function() {
             let rooms = await getRooms();
             let killRoom = await getKillRoom();
             message.addClass('has-text-success');
-            message.html(`Clue: ${player} went in the ${room}.`);
+            message.html(`Clue: Someone died in the ${rooms[killRoom]}.`);
         }
         else{
             message.html('No clues discovered.');

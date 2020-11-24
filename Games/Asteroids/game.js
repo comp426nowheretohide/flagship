@@ -150,7 +150,7 @@ setTimeout(async function() {
         let random = Math.random();
         if(random > .7){
             let playersRooms = await getRooms();
-            let randomIndex = (int) (Math.random() * playersRooms.length);
+            let randomIndex = Math.floor(Math.random() * playersRooms.length);
             let player = await getPlayer(id + 1);
             let room = playersRooms[randomIndex];
             message.addClass('has-text-success');
