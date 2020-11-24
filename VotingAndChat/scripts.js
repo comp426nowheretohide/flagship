@@ -87,6 +87,9 @@ let getAlivePlayers = async function() {
 
 let beginEjection = async function () {
     let theHost = await host();
+    if (theHost == currUser) {
+        await ejectPlayer();
+    }
     setTimeout(async () => {
         $('body').empty();
         let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
@@ -98,10 +101,10 @@ let beginEjection = async function () {
             message.html(`${ejectedPlayer} was ejected.`);
         }
         $('body').append(message);
+        await generateNewRound();
         let gameWon = await checkIfWon();
         setTimeout(async () => {
             if (gameWon == "false") {
-                await generateNewRound();
                 location.replace('../SpaceshipRooms/index.html');
             }
             else {
@@ -109,9 +112,6 @@ let beginEjection = async function () {
             }
         }, 5000);
     }, 2000)
-    if (theHost == currUser) {
-        await ejectPlayer();
-    }
 }
 
 let generateNewRound = async function () {
@@ -241,8 +241,8 @@ setTimeout(async () => {
         let player = await getPlayer(i);
         $(`#p${player}`).html(`${player} voted for ${votes[i]}.`);
     }
-    setTimeout(() => {
-        beginEjection();
+    setTimeout(async () => {
+        await beginEjection();
     }, 3000);
 }, 60000);
 
