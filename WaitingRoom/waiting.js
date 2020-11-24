@@ -17,6 +17,48 @@ function renderPlayers() {
 
             let $root = $(`#root`);
             $root.append(html)
+
+            try{
+                const result = await axios({
+                    method: 'get',
+                    url: `${base}/lobby/${gameId}`,
+                    headers: {
+                        authorization: `bearer ${idToken}`
+                    },
+                    withCredentials: true,
+                })
+                let users = new Array(6)
+                for(let i = 0; i < 6; i++) {
+                    users[i] = result.data[i];
+                }
+                for(let i = 0; i < 6; i++) {
+                    if(users[i] === undefined) {
+                        break
+                    } else {
+                        document.querySelector(`.user${i+1}`).innerHTML = `Player ${i + 1}: ` + users[i]
+                    }
+                }
+                if(users[5] !== undefined) {
+                    try {
+                        const res = await axios({
+                            method: 'post',
+                            url: `${base}/newRound/${gameId}`,
+                            headers: {
+                                authorization: `bearer ${idToken}`
+                            },
+                            withCredentials: true,
+                        })
+                        console.log(res.data);
+                    } catch(error) {
+                        console.log("ERROR")
+                    }
+        
+                    location.replace('../SpaceshipRooms/index.html')
+                }
+                return result;
+            } catch(error) {
+                console.log("ERROR")
+            }
 }
 
 function renderHeader() {
