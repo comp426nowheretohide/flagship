@@ -13,13 +13,13 @@ let createPeopleBox = async (vote) => {
     let btns = $('<div class = "buttons level-right"></div>');
     let isAlive = await isPlayerAlive(vote);
     field.append(p);
+    box.append(field);
     if (!isAlive) {
         p.addClass('has-text-danger');
     }
     else {
         field.append($(`<button class = "button is-small" style = "visibility:hidden"></button>`));
         field.append($(`<button class = "button is-small" style = "visibility:hidden"></button>`));
-        box.append(field);
         field.append(btns);
         box.on('click', () => {
             if (!voteButtonsActive) {
@@ -161,9 +161,9 @@ let getPlayer = async function (id) {
 
 let createPeopleBoxes = async (x1, x2, x3) => {
     let column = $('<div class = "column">');
-    column.append(createPeopleBox(x1));
-    column.append(createPeopleBox(x2));
-    column.append(createPeopleBox(x3));
+    column.append(await createPeopleBox(x1));
+    column.append(await createPeopleBox(x2));
+    column.append(await createPeopleBox(x3));
     return column;
 }
 
