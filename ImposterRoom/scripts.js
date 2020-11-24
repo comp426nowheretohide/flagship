@@ -34,7 +34,10 @@ let getImposterRoom = async () => {
 }
 getImposterRoom();
 
-$('.container').prepend(`<h1 class="hero is-size-1 mb-2">${imposterRoom}</h1>`);
+let createHeader = async ()=>{
+    await getImposterRoom();
+    $('.container').prepend(`<h1 class="hero is-size-1 mb-2">${imposterRoom}</h1>`);
+}
 
 $('#square').append('<p class = "is-size-4 has-text-danger mb-3">You may choose someone in the room with you to kill.</p>');
 
