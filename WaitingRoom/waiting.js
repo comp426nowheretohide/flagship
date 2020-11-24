@@ -20,8 +20,7 @@ function renderPlayers() {
 }
 
 function renderHeader() {
-    let $headers = $('.headers')
-    $headers.append(`<h3 class="hero is-size-3 mb-3">Game ID: ${gameId}</h3>`)
+    document.querySelector('.is-size-4').innerHTML = "Game ID: " + gameId
 }
 
 function renderPages() {
