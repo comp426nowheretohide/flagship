@@ -146,6 +146,28 @@ let isPlayerAlive = async function () {
     return result.data;
 }
 
+async function getWinner() {
+    try{
+        const result = await axios({
+            method: 'get',
+            url: `${gameBase}/games/${gameID}/won`,
+            headers: {
+                authorization: `bearer ${idToken}`
+            },
+            withCredentials: true,
+        })
+        console.log(result.data)
+        if(result.data != "false") {
+            location.replace('../Victory/index.html')
+        }
+    }
+    catch(e){
+        //show error
+    }
+}
+
+getWinner()
+
 setTimeout(async function () {
     let imposter = await getImposter();
     let isAlive = await isPlayerAlive();

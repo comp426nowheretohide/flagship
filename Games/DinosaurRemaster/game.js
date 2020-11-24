@@ -228,7 +228,7 @@ setTimeout(async function() {
     let imposterResult = await getImposter();
     let isLastKilled = await getLastPlayerKilled();
     $('body').empty();
-    let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
+    message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
     if (!isAlive) {
         if(isLastKilled == currUser){
             message.addClass('has-text-danger');
