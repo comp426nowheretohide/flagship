@@ -46,13 +46,11 @@ const renderBoard = function () {
             checker.addClass('victory');
             checker.append(`<p class="is-size-4 has-text-success">You've generated enough power for the engine! Task completed.</p>`);
             //send completed task to backend;
-            sendTaskResult(currUser, idToken, 1);
+            sendTaskResult(currUser, gameID, 1);
         }
     })
 
     game.onLose(function () {
-        // document.querySelector('.checker').style.color = "red";
-        // document.querySelector('.checker').innerHTML = "You Lose! You should try again by hitting the 'Reset Game' button."
         let checker = $('#checker');
         checker.empty();
         if (checker.hasClass('victory')) {
@@ -75,10 +73,6 @@ const resetGame = function () {
     game.setupNewGame()
     fillBoard()
     $('#checker').empty();
-}
-
-const returnToLobby = function () {
-    location.replace("../../SpaceshipRooms/index.html")
 }
 
 let time = 59;
@@ -232,13 +226,13 @@ setTimeout(async function () {
         if (random > .5) {
             message.addClass('has-text-success');
             let playersMinigamesCompleted = await getMinigame();
-            let randomIndex = Math.random() * playersMinigamesCompleted.length;
+            let randomIndex = (int) (Math.random() * playersMinigamesCompleted.length);
             let player = await getPlayer(id + 1);
-            if (playersMinigamesCompleted[randomIndex] == 0) {
-                message.html(`Clue: ${player} did not complete their task.`);
+            if (playersMinigamesCompleted[randomIndex] == 1) {
+                message.html(`Clue: ${player} completed their task.`);
             }
             else {
-                message.html(`Clue: ${player} completed their task.`);
+                message.html(`Clue: ${player} did not complete a task.`);
             }
         }
         else{

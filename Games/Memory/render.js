@@ -6,8 +6,10 @@ var firstMove;
 let canClick = false;
 let flips = 10;
 let pString = `<p class="has-text-danger is-size-4">You've got ${flips} flips left.</p>`;
-let idToken = sessionStorage.gameID;
+let idToken = sessionStorage.authToken;
+let gameID = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
+let base = sessionStorage.base;
 
 export const renderGameBoard = function(game) {
     return `
@@ -166,7 +168,7 @@ export const loadIntoDOM = function() {
             return;
         }
 
-        console.log('clicked');
+        //console.log('clicked');
 
         var cardFront = card.children[0];
         var cardBack = card.children[1];
@@ -187,7 +189,7 @@ export const loadIntoDOM = function() {
                 if(flips <= 0){
                     pString = `<p class="has-text-danger is-size-4">You have no idea where you are. Task failed. </p>`;
                     //Send task failure to backend
-                    sendTaskResult(currUser, idToken, 0);
+                    sendTaskResult(currUser, gameID, 0);
                 }
                 else{
                     pString = `<p class="has-text-danger is-size-4">You've got ${flips} flips left.</p>`;
@@ -208,22 +210,53 @@ export const loadIntoDOM = function() {
                     loadImages();
                     showMatched();
                     //Send successful result to backend
-                    sendTaskResult(currUser, idToken, 1);
+                    sendTaskResult(currUser, gameID, 1);
                 }
             }, 3000)
         }
     })
 }
 
-const returnToLobby = function() {
-    location.replace("../../SpaceshipRooms/index.html")
-}
 
 $(function() {
     loadIntoDOM();
 });
 
-let base = '';
+let isPlayerAlive = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameID}/${currUser}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getAlivePlayers = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameID}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+let getImposter = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/aliveI`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
 
 export async function sendTaskResult(name, gameID, score){
     //score is 1 for success, 0 for failure
@@ -231,7 +264,7 @@ export async function sendTaskResult(name, gameID, score){
         method: 'post', 
         url:`${base}/minigame/${gameID}/${name}/${score}`,
         headers: {
-            authorization: `bearer ${gameID}`,
+            authorization: `bearer ${idToken}`,
         }, 
         withCredentials: true
     })
@@ -240,10 +273,41 @@ export async function sendTaskResult(name, gameID, score){
 let time=59;
 
 setTimeout(function() {
-    location.replace("../../VotingAndChat/index.html")
+    clearInterval(timerInterval);
+    setTimeout(()=>{
+        location.replace("../../VotingAndChat/index.html");
+    }, 10000);
+    let isAlive = await isPlayerAlive();
+    $('body').empty();
+    let message = $('<p style = "margin-top: 300px" class= "is-size-4"></p>');
+    let imposterResult = await getImposter();
+    if (!isAlive) {
+        message.addClass('has-text-danger');
+        message.html(`You were stabbed to death by ${imposterResult}.`);
+    }
+    else {
+        let random = Math.random();
+        if (random > .5) {
+            message.addClass('has-text-success');
+            let alivePlayers = await getAlivePlayers();
+            let player1, player2;
+            do{
+                let random = (int) (Math.random() * alivePlayers.length);
+                let random2 = (int) (Math.random() * alivePlayers.length);
+                player1 = alivePlayers[random];
+                player2 = alivePlayers[random2];
+            }
+            while(player1 != player2 != imposterResult);
+            message.html(`The imposter is either ${imposterResult}, ${player1} ,${player2}.`);
+        }
+        else{
+            message.html('No clues discovered.');
+        }
+    }
+    body.append(message);
 }, 60000);
 
-setInterval(function() {
+let timeInterval = setInterval(function() {
     document.getElementById("time").innerHTML = time--;
 }, 1000)
 
