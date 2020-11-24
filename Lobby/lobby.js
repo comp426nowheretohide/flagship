@@ -24,7 +24,7 @@ createForm.addEventListener('submit', (e) => {
     createGame(name, id);
 })
 
-let base = 'https://beiarau37k.execute-api.us-east-2.amazonaws.com/prod';
+let base = 'https://fep5m5i3o0.execute-api.us-east-2.amazonaws.com/prod';
 
 sessionStorage.setItem("base", base);
 
@@ -63,9 +63,9 @@ let joinGame = async function(name, id){
             withCredentials: true,
         })
         console.log(result.data)
-        sessionStorage.setItem("gameId", id)
-        sessionStorage.setItem("currentUser", name)
-        location.replace('../WaitingRoom/index.html')
+        // sessionStorage.setItem("gameId", id)
+        // sessionStorage.setItem("currentUser", name)
+        // location.replace('../WaitingRoom/index.html')
         return result;
     }
     catch(error){
