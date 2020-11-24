@@ -159,6 +159,7 @@ let createPlayerBoxes = async () => {
     $('.columns').append(column1);
     $('.columns').append(column2);
 }
+createPlayerBoxes();
 
 let getVotes = async function () {
     const result = await axios({
@@ -205,6 +206,7 @@ let getPlayer = async function (id) {
 
 setTimeout(async () => {
     voteButtonsActive = false;
+    clearInterval(timerInterval);
     let votes = await getVotes();
     for (let i = 0; i < votes.length; i++) {
         let player = await getPlayer(i);

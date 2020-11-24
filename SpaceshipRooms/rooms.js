@@ -85,8 +85,23 @@ columns.append(createColumn('Cafeteria', 'Observatory'));
 columns.append(createColumn('Cockpit','Defense'));
 display.append(columns);
 
-setTimeout(function() {
-    if(chosenRoom == "Electrical") {
+let getImposter = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/aliveI`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
+setTimeout(async function() {
+    let imposter = await getImposter();
+    if(imposter == currUser){
+        location.replace("../ImposterRoom/index.html");
+    } else if(chosenRoom == "Electrical") {
         location.replace("../Games/TriviaGame/index.html");
     } else if(chosenRoom == "Engine") {
         location.replace("../Games/2048Remodel/index.html");

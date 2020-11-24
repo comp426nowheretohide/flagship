@@ -151,7 +151,7 @@ setTimeout(async function() {
         if(random > .7){
             let playersRooms = await getRooms();
             let randomIndex = Math.floor(Math.random() * playersRooms.length);
-            let player = await getPlayer(id + 1);
+            let player = await getPlayer(randomIndex + 1);
             let room = playersRooms[randomIndex];
             message.addClass('has-text-success');
             message.html(`Clue: ${player} went in the ${room}.`);
