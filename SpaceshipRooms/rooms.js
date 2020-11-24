@@ -22,45 +22,45 @@ let createRoom = (name) => {
     enterButton.on('click', (event) => {
         //send choice to backend and update the number with new total of players from backend;
         $('.enter').remove();
-        if(event.currentTarget.id == "Electrical") {
+        if (event.currentTarget.id == "Electrical") {
             chosenRoom = "Electrical"
             chooseRoom("Electrical");
             // location.replace("../Games/TriviaGame/index.html");
-        } else if(event.currentTarget.id == "Engine") {
+        } else if (event.currentTarget.id == "Engine") {
             chosenRoom = "Engine"
             chooseRoom("Engine");
             // location.replace("../Games/2048Remodel/index.html");
-        } else if(event.currentTarget.id == "Cafeteria") {
+        } else if (event.currentTarget.id == "Cafeteria") {
             chosenRoom = "Cafeteria"
             chooseRoom("Cafeteria");
             // location.replace("../Games/Snake/index.html");
-        } else if(event.currentTarget.id == "Observatory") {
+        } else if (event.currentTarget.id == "Observatory") {
             chosenRoom = "Observatory"
             chooseRoom("Observatory");
             // location.replace("../Games/Memory/index.html");
-        } else if(event.currentTarget.id == "Cockpit") {
+        } else if (event.currentTarget.id == "Cockpit") {
             chosenRoom = "Cockpit"
             chooseRoom("Cockpit");
             // location.replace("../Games/DinosaurRemaster/index.html");
-        } else if(event.currentTarget.id == "Defense") {
+        } else if (event.currentTarget.id == "Defense") {
             chosenRoom = "Defense"
             chooseRoom("Defense");
             // location.replace("../Games/Asteroids/index.html");
         }
     });
     box.append(enterButton);
-    
+
     return box;
 }
 
-let createColumn = (name1, name2) =>{
+let createColumn = (name1, name2) => {
     let column = $(`<div class = "column content"></div>`);
     column.append(createRoom(name1));
     column.append(createRoom(name2));
     return column;
 }
 
-let chooseRoom = async function(roomName){
+let chooseRoom = async function (roomName) {
     const result = await axios({
         method: 'put',
         url: `${gameBase}/room/${gameID}/${currUser}/${roomName}`,
@@ -80,9 +80,9 @@ let chooseRoom = async function(roomName){
 //Defense: Asteroids
 //Electrical: Math Trivia
 //Engine: 2048 
-columns.append(createColumn('Electrical','Engine'));
+columns.append(createColumn('Electrical', 'Engine'));
 columns.append(createColumn('Cafeteria', 'Observatory'));
-columns.append(createColumn('Cockpit','Defense'));
+columns.append(createColumn('Cockpit', 'Defense'));
 display.append(columns);
 
 let getImposter = async function () {
@@ -97,25 +97,47 @@ let getImposter = async function () {
     return result.data;
 }
 
-setTimeout(async function() {
+setTimeout(async function () {
     let imposter = await getImposter();
-    if(imposter == currUser){
+    if (imposter == currUser) {
         location.replace("../ImposterRoom/index.html");
-    } else if(chosenRoom == "Electrical") {
+    } else if (chosenRoom == "Electrical") {
         location.replace("../Games/TriviaGame/index.html");
-    } else if(chosenRoom == "Engine") {
+    } else if (chosenRoom == "Engine") {
         location.replace("../Games/2048Remodel/index.html");
-    } else if(chosenRoom == "Cafeteria") {
+    } else if (chosenRoom == "Cafeteria") {
         location.replace("../Games/Snake/index.html");
-    } else if(chosenRoom == "Observatory") {
+    } else if (chosenRoom == "Observatory") {
         location.replace("../Games/Memory/index.html");
-    } else if(chosenRoom == "Cockpit") {
+    } else if (chosenRoom == "Cockpit") {
         location.replace("../Games/DinosaurRemaster/index.html");
-    } else if(chosenRoom == "Defense") {
+    } else if (chosenRoom == "Defense") {
         location.replace("../Games/Asteroids/index.html");
+    } else {
+        let random = Math.floor(Math.random() * 6);
+        switch (random) {
+            case 0:
+                location.replace("../Games/DinosaurRemaster/index.html");
+                break;
+            case 1:
+                location.replace("../Games/TriviaGame/index.html");
+                break;
+            case 2: 
+                location.replace("../Games/2048Remodel/index.html");
+                break;
+            case 3: 
+                location.replace("../Games/Snake/index.html");
+                break;
+            case 4: 
+                location.replace("../Games/Memory/index.html");
+                break;
+            case 5:
+                location.replace("../Games/Asteroids/index.html");
+                break;
+        }
     }
 }, 30000)
 
-setInterval(function() {
+setInterval(function () {
     document.getElementById("time").innerHTML = time--;
 }, 1000)

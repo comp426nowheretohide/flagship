@@ -82,8 +82,9 @@ let beginEjection = async function () {
         }
         $('body').append(message);
         let gameWon = await checkIfWon();
-        setTimeout(() => {
+        setTimeout(async () => {
             if (gameWon == "false") {
+                await generateNewRound();
                 location.replace('../SpaceshipRooms/index.html');
             }
             else {
@@ -94,6 +95,18 @@ let beginEjection = async function () {
     if (theHost == currUser) {
         await ejectPlayer();
     }
+}
+
+let generateNewRound = async function () {
+    const result = await axios({
+        method: "POST",
+        url: `${base}/newRound/${gameId}`,
+        headers: {
+            authorization: `bearer ${idToken}`
+        },
+        withCredentials: true,
+    })
+    return result;
 }
 
 //initiates ejection process
