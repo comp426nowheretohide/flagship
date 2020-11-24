@@ -82,11 +82,11 @@ let beginEjection = async function () {
         $('body').append(message);
         let gameWon = await checkIfWon();
         setTimeout(() => {
-            if (gameWon) {
-                location.replace('../Victory/index.html');
+            if (gameWon == "false") {
+                location.replace('../SpaceshipRooms/index.html');
             }
             else {
-                location.replace('../SpaceshipRooms/index.html');
+                location.replace('../Victory/index.html');
             }
         }, 5000);
     }, 2000)
