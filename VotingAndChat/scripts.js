@@ -188,7 +188,7 @@ let getVotes = async function () {
 let isPlayerAlive = async function (name) {
     const result = await axios({
         method: 'get',
-        url: `${base}/alive/${gameID}/${name}`,
+        url: `${base}/alive/${gameId}/${name}`,
         headers: {
             authorization: `bearer ${idToken}`,
         },
