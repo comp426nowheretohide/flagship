@@ -145,6 +145,18 @@ let checkIfWon = async function () {
     return result.data;
 }
 
+let getPlayer = async function (id) {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/user${id}`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
+    return result.data;
+}
+
 let createPeopleBoxes = async (x1, x2, x3) => {
     let column = $('<div class = "column">');
     column.append(createPeopleBox(x1));
@@ -191,18 +203,6 @@ let timerInterval = setInterval(function () {
     time--;
     $('#time').html(`${time}`);
 }, 1000);
-
-let getPlayer = async function (id) {
-    const result = await axios({
-        method: 'get',
-        url: `${base}/games/${gameID}/user${id}`,
-        headers: {
-            authorization: `bearer ${idToken}`,
-        },
-        withCredentials: true
-    })
-    return result.data;
-}
 
 setTimeout(async () => {
     voteButtonsActive = false;
