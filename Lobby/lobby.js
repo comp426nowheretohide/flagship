@@ -30,7 +30,7 @@ sessionStorage.setItem("base", base);
 
 let idToken = sessionStorage.authToken;
 
-let createGame = function(name, id){
+let createGame = async function(name, id){
     try {
         const result = await axios({
             method: 'put', 
