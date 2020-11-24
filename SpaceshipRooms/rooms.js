@@ -137,7 +137,7 @@ let getImposter = async function () {
 let isPlayerAlive = async function () {
     const result = await axios({
         method: 'get',
-        url: `${base}/alive/${gameID}/${currUser}`,
+        url: `${gameBase}/alive/${gameID}/${currUser}`,
         headers: {
             authorization: `bearer ${idToken}`,
         },
