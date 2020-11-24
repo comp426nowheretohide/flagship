@@ -1,6 +1,8 @@
 import Game from './engine/game.js'
 
 let game = new Game(4)
+let idToken = sessionStorage.authToken;
+let currUser = sessionStorage.currentUser;
 
 const renderBoard = function () {
     // Grab a jQuery reference to the root HTML element
@@ -42,6 +44,8 @@ const renderBoard = function () {
             checker.addClass('victory');
             checker.append(`<p class="is-size-4 has-text-success">You've generated enough power for the engine! Task completed.</p>`);
             //send completed task to backend;
+
+
         }
     })
 

@@ -30,7 +30,7 @@ let base = 'https://k01kns80c4.execute-api.us-east-2.amazonaws.com/prod';
 let idToken = sessionStorage.authToken;
 
 let createGame = async function(name, id){
-    try{
+    try {
         const result = await axios({
             method: 'put', 
             url:`${base}/newGame/${id}/${name}`,
