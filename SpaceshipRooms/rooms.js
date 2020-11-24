@@ -73,6 +73,21 @@ let chooseRoom = async function (roomName) {
     return result;
 }
 
+
+let getTotals = async function() {
+    let countedRooms = rooms.reduce(function (allRooms, room) { 
+        if (room in allRooms) {
+          allRooms[room]++;
+        }
+        else {
+          allRooms[room] = 0;
+        }
+        return allRooms;
+    });
+
+
+}
+
 //I'm thinking :
 //Observatory: Memory
 //Cafeteria: Snake Game
