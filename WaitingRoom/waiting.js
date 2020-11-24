@@ -76,22 +76,22 @@ setInterval(async function() {
             }
         }
         if(users[5] !== undefined) {
-            // try {
-            //     const res = await axios({
-            //         method: 'post',
-            //         url: `${base}/newRound/${gameId}`,
-            //         headers: {
-            //             authorization: `bearer ${idToken}`
-            //         },
-            //         withCredentials: true,
-            //     })
-            //     console.log(res.data);
-            //     return res;
-            // } catch(error) {
-            //     console.log("ERROR")
-            // }
+            try {
+                const res = await axios({
+                    method: 'get',
+                    url: `${base}/games/${gameId}`,
+                    headers: {
+                        authorization: `bearer ${idToken}`
+                    },
+                    withCredentials: true,
+                })
+                console.log(res.data);
+                return res;
+            } catch(error) {
+                console.log("ERROR")
+            }
 
-            location.replace('../SpaceshipRooms/index.html')
+            // location.replace('../SpaceshipRooms/index.html')
         }
         return result;
     } catch(error) {
