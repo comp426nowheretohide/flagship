@@ -25,7 +25,7 @@ createForm.addEventListener('submit', (e) => {
 
 })
 
-let base = 'https://k01kns80c4.execute-api.us-east-2.amazonaws.com/prod';
+let base = 'https://7td0d7czl7.execute-api.us-east-2.amazonaws.com/prod';
 
 let idToken = sessionStorage.authToken;
 
@@ -39,6 +39,9 @@ let createGame = async function(name, id){
             }, 
             withCredentials: true
         })
+        sessionStorage.setItem("gameId", result.data.gameId)
+        sessionStorage.setItem("currentUser", result.data.user1)
+        console.log("Registered game ID: " + sessionStorage.gameId + " as user: " + sessionStorage.currentUser)
         return result;
     }
     catch(error){

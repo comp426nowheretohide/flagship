@@ -150,6 +150,7 @@ const fillBoard = function () {
 }
 
 let base = '';
+let idToken = sessionStorage.authToken;
 
 let sendTaskResult = async function(name, gameID, score){
     //score is 1 for success, 0 for failure
