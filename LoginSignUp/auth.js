@@ -36,11 +36,11 @@ logInForm.addEventListener('submit', (e) => {
 })
 
 
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(async function(user) {
     if (user) {
         console.log("user is signed in!");
         console.log(auth.currentUser);
-        sessionStorage.setItem("authToken", auth.currentUser.getIdToken(true))
+        sessionStorage.setItem("authToken", await auth.currentUser.getIdToken(true))
         console.log(sessionStorage.authToken)
         location.replace('../Lobby/index.html')
     } else {
