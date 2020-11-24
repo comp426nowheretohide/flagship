@@ -1,3 +1,7 @@
+let gameId = sessionStorage.gameId;
+let idToken = sessionStorage.authToken;
+let base = sessionStorage.base;
+let currUser = sessionStorage.currUser;
 
 let voteButtonsActive = false;
 
@@ -16,7 +20,8 @@ let createPeopleBox = (vote) =>{
             let voteBtn = $('<button class="button is-success is-inline is-small level-item">✔</button>');
             let cancelBtn = $('<button class="button is-danger is-inline is-small level-item">✘</button>');
             voteBtn.on('click',()=>{
-                //send vote to backend
+                //send vote to backend                
+
                 btns.empty();
             })
             cancelBtn.on('click',()=>{
@@ -33,12 +38,55 @@ let createPeopleBox = (vote) =>{
 
 let base = '';
 
-let votePlayer = async function(player, gameID, vote){
+let votePlayer = async function(votedFor){
     const result = await axios({
-        method: 'put', 
-        url:`${base}/vote/${gameID}/${player}/${vote}`
+        method: 'put',
+        url: `${base}/vote/${gameId}/${currUser}/${votedFor}`,
+        headers: {
+            authorization: `bearer ${idToken}`
+        },
+        withCredentials: true,
     })
     return result;
+}
+
+//should return an array of living players (to be added to the boxes)
+let getAlivePlayers = async function() {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/alive/${gameId}`,
+        headers: {
+            authorization: `bearer ${idToken}`
+        },
+        withCredentials: true,
+    })
+    return result;
+}
+
+//initiates ejection process
+let ejectPlayer = async function() {
+    const result = await axios ({
+        method: 'post', 
+        url: `${base}/eject/${gameId}`,
+        headers: {
+            authorization: `bearer ${idToken}`
+        }, 
+        withCredentials: true,
+    })
+    return result;
+}
+
+//should return 'false' for no winner, 'crew' if crew won, and 'imposter' if imposter won
+let checkIfWon = async function() {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameId}/vote`,
+        headers: {
+            authorization: `bearer ${idToken}`
+        },
+        withCredentials: true,
+    })
+    return result.data.won; 
 }
 
 let createPeopleBoxes = (x) =>{
