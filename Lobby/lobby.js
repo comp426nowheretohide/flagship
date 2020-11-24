@@ -25,13 +25,19 @@ createForm.addEventListener('submit', (e) => {
 
 })
 
-let base = 'https://arj00wp268.execute-api.us-east-2.amazonaws.com/prod';
+let base = 'https://k01kns80c4.execute-api.us-east-2.amazonaws.com/prod';
+
+let idToken = sessionStorage.authToken;
 
 let createGame = async function(name, id){
     try{
         const result = await axios({
             method: 'put', 
-            url:`${base}/newGame/${id}/${name}`
+            url:`${base}/newGame/${id}/${name}`,
+            headers: {
+                authorization: `bearer ${idToken}`,
+            }, 
+            withCredentials: true
         })
         return result;
     }
@@ -44,7 +50,11 @@ let joinGame = async function(name, id){
     try{
         const result = await axios({
             method: 'post', 
-            url:`${base}/games/addPlayer/${id}/${name}`
+            url:`${base}/games/addPlayer/${id}/${name}`,
+            headers: {
+                authorization: `bearer ${idToken}`
+            },
+            withCredentials: true,
         })
         return result;
     }
