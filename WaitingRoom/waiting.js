@@ -72,6 +72,6 @@ setInterval(async function() {
         }
         return result;
     } catch(error) {
-        document.querySelector('.user1').innerHTML = "Well, this sucks"
+        console.log("Well, this sucks")
     }
 }, 3000)
