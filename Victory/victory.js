@@ -22,7 +22,7 @@ function renderWinner() {
     let html = `<section class="hero is-fullheight">
                     <div class="hero-body has-text-centered">
                         <div class="container">
-                            <h1 class = "title is-1 has-text-white has-text-centered">Congrats, you won!</h1>
+                            <h1 class = "title is-1 has-text-white has-text-centered">Congrats ${winner}, you won!</h1>
                         <div class='container'> 
                         <div class='columns is-mobile is-centered'> 
                             <div class='column is-4'> 
