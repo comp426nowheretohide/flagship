@@ -70,6 +70,9 @@ setInterval(async function() {
                 document.querySelector(`.user${i+1}`).innerHTML = `Player ${i + 1}: ` + users[i]
             }
         }
+        if(users[5] !== undefined) {
+            location.replace('../SpaceshipRooms/index.html')
+        }
         return result;
     } catch(error) {
         console.log("ERROR")

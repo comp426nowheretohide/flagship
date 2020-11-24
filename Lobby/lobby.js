@@ -61,6 +61,7 @@ let joinGame = async function(name, id){
             },
             withCredentials: true,
         })
+        location.replace('../WaitingRoom/index.html')
         return result;
     }
     catch(error){
