@@ -6,7 +6,7 @@ let base = sessionStorage.base;
 async function getWinner() {
     const result = await axios({
         method: 'get',
-        url: `${base}/games/${gameId}/vote`,
+        url: `${base}/games/${gameId}/won`,
         headers: {
             authorization: `bearer ${idToken}`
         },

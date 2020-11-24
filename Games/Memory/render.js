@@ -1,7 +1,7 @@
 import memoryGame from './memory.js';
 
 let game = new memoryGame();
-let clicks = 0; 
+let clicks = 0;
 var firstMove;
 let canClick = false;
 let flips = 10;
@@ -11,7 +11,7 @@ let gameID = sessionStorage.gameID;
 let currUser = sessionStorage.currentUser;
 let base = sessionStorage.base;
 
-export const renderGameBoard = function(game) {
+export const renderGameBoard = function (game) {
     return `
     <span id=board>
     ${pString}
@@ -93,7 +93,7 @@ export const renderGameBoard = function(game) {
     `
 }
 
-export const loadImages = function() {
+export const loadImages = function () {
     let im0 = `<img src="im0.jpg"></img>`;
     let im1 = `<img src="im1.jpg"></img>`;
     let im2 = `<img src="im2.gif"></img>`;
@@ -125,7 +125,7 @@ export const loadImages = function() {
     }
 }
 
-export const showImages = function() {
+export const showImages = function () {
     var cardFronts = document.getElementsByClassName("card-front");
     var cardBacks = document.getElementsByClassName("card-back");
     for (let i = 0; i < 12; i++) {
@@ -133,7 +133,7 @@ export const showImages = function() {
     }
 }
 
-export const showMatched = function() {
+export const showMatched = function () {
     var cardFronts = document.getElementsByClassName("card-front");
     var cardBacks = document.getElementsByClassName("card-back");
 
@@ -144,7 +144,7 @@ export const showMatched = function() {
     }
 }
 
-export const loadIntoDOM = function() {
+export const loadIntoDOM = function () {
     const $root = $('#root');
 
     let gameBoard = renderGameBoard(game);
@@ -154,17 +154,17 @@ export const loadIntoDOM = function() {
 
     showImages();
 
-    setTimeout (function onTick() {
+    setTimeout(function onTick() {
         $("#board").replaceWith(renderGameBoard(game));
         loadImages();
         canClick = true;
     }, 8000)
 
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         var card = event.target.parentElement;
         let id = parseInt(card.id);
 
-        if(!canClick || isNaN(id) || card.children[1] == undefined){
+        if (!canClick || isNaN(id) || card.children[1] == undefined) {
             return;
         }
 
@@ -177,21 +177,21 @@ export const loadIntoDOM = function() {
 
         if (clicks == 1) {
             firstMove = card;
-            cardFront.innerHTML = cardBack.innerHTML; 
+            cardFront.innerHTML = cardBack.innerHTML;
         } else if (clicks == 2) {
-            cardFront.innerHTML = cardBack.innerHTML; 
+            cardFront.innerHTML = cardBack.innerHTML;
             game.move(firstMove.id, card.id);
             clicks = 0;
-            flips --;
+            flips--;
             canClick = false;
 
-            if(!game.checkIfWon()){
-                if(flips <= 0){
+            if (!game.checkIfWon()) {
+                if (flips <= 0) {
                     pString = `<p class="has-text-danger is-size-4">You have no idea where you are. Task failed. </p>`;
                     //Send task failure to backend
                     sendTaskResult(currUser, gameID, 0);
                 }
-                else{
+                else {
                     pString = `<p class="has-text-danger is-size-4">You've got ${flips} flips left.</p>`;
                 }
             }
@@ -204,7 +204,7 @@ export const loadIntoDOM = function() {
             }, 1000)
 
             setTimeout(function checkWin() {
-                if(game.checkIfWon()){
+                if (game.checkIfWon()) {
                     pString = `<p class="has-text-success is-size-4">You're on the right path! Task Completed!</p>`;
                     $("#board").replaceWith(renderGameBoard(game));
                     loadImages();
@@ -218,7 +218,7 @@ export const loadIntoDOM = function() {
 }
 
 
-$(function() {
+$(function () {
     loadIntoDOM();
 });
 
@@ -234,10 +234,10 @@ let isPlayerAlive = async function () {
     return result.data;
 }
 
-let getAlivePlayers = async function () {
+let getAliveCrew = async function () {
     const result = await axios({
         method: 'get',
-        url: `${base}/alive/${gameID}`,
+        url: `${base}/games/${gameID}/aliveC`,
         headers: {
             authorization: `bearer ${idToken}`,
         },
@@ -258,23 +258,23 @@ let getImposter = async function () {
     return result.data;
 }
 
-export async function sendTaskResult(name, gameID, score){
+export async function sendTaskResult(name, gameID, score) {
     //score is 1 for success, 0 for failure
     const result = await axios({
-        method: 'post', 
-        url:`${base}/minigame/${gameID}/${name}/${score}`,
+        method: 'post',
+        url: `${base}/minigame/${gameID}/${name}/${score}`,
         headers: {
             authorization: `bearer ${idToken}`,
-        }, 
+        },
         withCredentials: true
     })
 }
 
-let time=59;
+let time = 59;
 
-setTimeout(function() {
+setTimeout(function () {
     clearInterval(timerInterval);
-    setTimeout(()=>{
+    setTimeout(() => {
         location.replace("../../VotingAndChat/index.html");
     }, 10000);
     let isAlive = await isPlayerAlive();
@@ -289,25 +289,34 @@ setTimeout(function() {
         let random = Math.random();
         if (random > .5) {
             message.addClass('has-text-success');
-            let alivePlayers = await getAlivePlayers();
+            let alivePlayers = await getAliveCrew();
             let player1, player2;
-            do{
-                let random = (int) (Math.random() * alivePlayers.length);
-                let random2 = (int) (Math.random() * alivePlayers.length);
-                player1 = alivePlayers[random];
-                player2 = alivePlayers[random2];
+            let random = (int)(Math.random() * alivePlayers.length);
+            let random2 = random + 1;
+            if (random == alivePlayers.length - 1) {
+                random2 = alivePlayers.length - 2;
             }
-            while(player1 != player2 != imposterResult);
-            message.html(`The imposter is either ${imposterResult}, ${player1} ,${player2}.`);
+            player1 = alivePlayers[random];
+            player2 = alivePlayers[random2];
+            let random3 = Math.random();
+            if(random > .7){
+                message.html(`The imposter is either ${imposterResult}, ${player1}, or ${player2}.`);
+            }
+            else if(random > .3){
+                message.html(`The imposter is either ${player1}, ${imposterResult}, or ${player2}.`);
+            }
+            else {
+                message.html(`The imposter is either ${player2}, ${player1}, or ${imposterResult}.`);
+            }
         }
-        else{
+        else {
             message.html('No clues discovered.');
         }
     }
     body.append(message);
 }, 60000);
 
-let timeInterval = setInterval(function() {
+let timeInterval = setInterval(function () {
     document.getElementById("time").innerHTML = time--;
 }, 1000)
 

@@ -219,18 +219,6 @@ let getImposter = async function () {
     return result.data;
 }
 
-let getPlayer = async function (id) {
-    const result = await axios({
-        method: 'get',
-        url: `${base}/games/${gameID}/user${id}`,
-        headers: {
-            authorization: `bearer ${idToken}`,
-        },
-        withCredentials: true
-    })
-    return result.data;
-}
-
 let getRooms = async function () {
     const result = await axios({
         method: 'get',
@@ -241,6 +229,17 @@ let getRooms = async function () {
         withCredentials: true
     })
     return result.data;
+}
+
+let getKillRoom = async function () {
+    const result = await axios({
+        method: 'get',
+        url: `${base}/games/${gameID}/killRoom`,
+        headers: {
+            authorization: `bearer ${idToken}`,
+        },
+        withCredentials: true
+    })
 }
 
 setTimeout(function() {
@@ -258,10 +257,8 @@ setTimeout(function() {
     else {
         let random = Math.random();
         if(random > .4){
-            let playersRooms = await getRooms();
-            let randomIndex = (int) (Math.random() * playersRooms.length);
-            let player = await getPlayer(id + 1);
-            let room = playersRooms[randomIndex];
+            let rooms = await getRooms();
+            let killRoom = await getKillRoom();
             message.addClass('has-text-success');
             message.html(`Clue: ${player} went in the ${room}.`);
         }
