@@ -78,7 +78,6 @@ const resetGame = function () {
 let time = 59;
 
 const startNewGame = function () {
-
     let html = `<div class="container">
                     <h1 class="hero is-size-1">Engine</h1>
                     <h2 class="hero is-size-3">Power the ship by combining tiles and get the 256 tile to complete the task!</h2>
