@@ -42,7 +42,7 @@ async function renderWinner() {
                 </section>`
     let $root = $(`#root`);
     $root.append(html);
-    $('#btn').on("click",redirect());
+    $('#btn').on("click",redirect);
 }
 
 function redirect(event){

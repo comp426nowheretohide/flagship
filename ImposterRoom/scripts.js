@@ -38,6 +38,8 @@ let createHeader = async ()=>{
     $('.container').prepend(`<h1 class="hero is-size-1 mb-2">${imposterRoom}</h1>`);
 }
 
+createHeader();
+
 $('#square').append('<p class = "is-size-4 has-text-danger mb-3">You may choose someone in the room with you to kill.</p>');
 
 let createPeopleBox = (name) => {

@@ -9,7 +9,7 @@ let createPeopleBox = async (vote) => {
     console.log('peopleBox called');
     let box = $(`<div class = "box player" id= "${vote}"></div>`);
     let field = $(`<div class = "field level"></div>`);
-    let p = $(`<p id = "#p${vote}">${vote}</p>`);
+    let p = $(`<p id = "p${vote}">${vote}</p>`);
     let btns = $('<div class = "buttons level-right"></div>');
     let isAlive = await isPlayerAlive(vote);
     field.append(p);
@@ -100,7 +100,7 @@ let beginEjection = async function () {
 let generateNewRound = async function () {
     const result = await axios({
         method: "POST",
-        url: `${base}/newRound/${gameId}`,
+        url: `${base}/newRound/${gameId}/${currUser}`,
         headers: {
             authorization: `bearer ${idToken}`
         },
@@ -113,7 +113,7 @@ let generateNewRound = async function () {
 let ejectPlayer = async function () {
     const result = await axios({
         method: 'post',
-        url: `${base}/eject/${gameId}`,
+        url: `${base}/eject/${gameId}/${currUser}`,
         headers: {
             authorization: `bearer ${idToken}`
         },
