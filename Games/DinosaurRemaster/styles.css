@@ -1,0 +1,141 @@
+.game {
+    width: 800px;
+    height: 400px;
+    background-color: black;
+    margin: auto;
+}
+
+#spaceship {
+    width: 125px;
+    height: 50px;
+    background-image: url(Spaceship.jpg);
+    background-size: 125px 50px;
+    position: relative;
+    top: 175px;
+}
+
+#asteroid {
+    width: 125px;
+    height: 125px;
+    background-image: url(Asteroid.jpg);
+    background-size: 125px 125px;
+    position: relative;
+    top: 100px;
+    left: 675px;
+    animation: left 1s infinite linear;
+}
+
+#asteroid2 {
+    width: 125px;
+    height: 125px;
+    background-image: url(Asteroid.jpg);
+    background-size: 125px 125px;
+    position: absolute;
+    top: 400px;
+    animation: asteroid2Left 1s infinite linear;
+}
+
+.up{
+    animation: up .5s linear;
+}
+
+.down{
+    animation: down .5s linear;
+}
+
+@keyframes up{
+    0% {
+        top: 175px;
+    }
+    10% {
+        top: 75px;
+    }
+    25% {
+        top: 35px;
+    }
+    35%{
+        top: 15px;
+    }
+    50%{
+        top: 5px;
+    }
+}
+
+@keyframes down{
+    0% {
+        top: 175px;
+    }
+    10%{
+        top: 280px;
+    }
+    25%{
+        top: 320px;
+    }
+    35%{
+        top: 340px;
+    }
+    50%{
+        top: 350px;
+    }
+}
+
+@keyframes left{
+    0%{
+        left: 675px;
+    }
+    100%{
+        left: -125px;
+        transform: rotate(120deg);
+    }
+}
+
+@keyframes asteroid2Left{
+    0%{
+        left: 1175px;
+    }
+    100%{
+        left: 300px;
+        transform: rotate(120deg);
+    }
+}
+
+#time {
+    text-align: center;
+    font-size: 30px;
+}
+
+html {
+    background-image: url('Static.jpg');
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: whitesmoke;
+}
+h2, p{
+    text-align: center;
+}
+
+#buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.back {
+    background-color: lightgrey; 
+    border: 2px solid palevioletred;
+    color: black;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 12px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+.back:hover {
+    background-color: palevioletred;
+}

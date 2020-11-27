@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Cockpit
+    </title>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1 class="hero is-size-1">Cockpit</h1>
+    <h2 class="hero is-size-3">Pilot the ship with the up and down keys and avoid asteroids!</h2>
+    <div id="time">59</div>
+    <p class="is-size-4 has-text-danger"></p>
+    <div class="game">
+        <div id="spaceship"></div>
+        <div id="asteroids"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

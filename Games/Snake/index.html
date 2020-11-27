@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Cafeteria</title>
+      <link rel="stylesheet" href="styles.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <h1 class="hero is-size-1">Cafeteria</h1>
+    <h2 class="hero is-size-3">Guide your pet snake to eat the crumbs left in the Cafeteria!</h2>
+    <div id="time">59</div>
+    <p class="is-size-5">Use the arrow keys and avoid walls and your tail. Get 100 points to complete your task!</p>
+    <div id="score">0</div>
+    <div id="canvas">
+      <canvas id="snakeBoard" width="400" height="400"></canvas>
+    </div>
+
+  </body>
+
+  <script src='./snake.js'></script>
+</html>

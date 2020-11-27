@@ -1,0 +1,23 @@
+html {
+    background-image: url('Static.jpg');
+    background-size: cover;
+}
+
+#square {
+    height: 650px;
+    width: 900px;
+    margin: 50px;
+}
+
+.player {
+    width: 418px;
+    height: 64px;
+}
+h1 {
+text-align: center;
+color: whitesmoke;
+}
+
+h2, p{
+    text-align:center;
+}

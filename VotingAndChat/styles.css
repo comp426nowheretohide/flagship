@@ -1,0 +1,28 @@
+html {
+    background-image: url('Static.png');
+    background-size: cover;
+}
+
+#square {
+    height: 300px;
+    width: 900px;
+    margin: 50px;
+}
+
+.player {
+    width: 418px;
+    height: 64px;
+}
+
+#square #chat {
+    position: absolute;
+    bottom: 60px;
+}
+
+h1 {
+    text-align: center;
+    color: whitesmoke;
+}
+h2, p{
+    text-align: center;
+}

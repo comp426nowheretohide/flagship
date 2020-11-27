@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link rel="stylesheet" href="loginStyle.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand&display=swap" rel="stylesheet">
+
+    <title>Login or Signup</title>
+</head>
+<body>
+
+    <section class="hero is-fullheight has-background"> 
+        <div class="hero-body">
+            <section class = "container">
+            <div class="columns is-centered">
+
+                <div class="column is-half">
+                    <h1 class="title has-text-white">Login</h1>
+                    <form id="login-form">
+                        <div class="field">
+                            <label class="label has-text-white">Email</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Username" name="username" id="loginUser">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label has-text-white">Password</label>
+                            <div class="control">
+                                <input class="input" type="password" placeholder="Password" name="password" id="loginPass">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <input class="button is-warning" type="submit"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="column is-half">
+                    <h1 class="title has-text-white">Sign Up</h1>
+
+                    <form id="signup-form">
+                        <div class="field">
+                            <label class="label has-text-white">Email</label>
+                            <input class="input" type="email" placeholder="Email" name="username" id="signUpUser">
+                        </div>
+                        <div class="field">
+                            <label class="label has-text-white">Password</label>
+                            <input class="input" type="password" placeholder="Password" name="password" id="signUpPass">
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <input class="button is-warning" type="submit"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+            </section>
+    </section>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+
+
+    <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyCpITFkn3xX9xWpX8nQLdVp6BIrY3yOxz0",
+        authDomain: "final-bad6f.firebaseapp.com",
+        databaseURL: "https://final-bad6f.firebaseio.com",
+        projectId: "final-bad6f",
+        storageBucket: "final-bad6f.appspot.com",
+        messagingSenderId: "893231851162",
+        appId: "1:893231851162:web:6e54aec6a929f0b120a123",
+        measurementId: "G-C176PLHQX1"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    //make auth and firestore references 
+
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    //update firestore setting, sets up how program deals with timestamps
+    db.settings( {timestampsInSnapshots: true})
+    </script>
+    <script src="auth.js"></script>
+
+
+    
+</body>
+</html>

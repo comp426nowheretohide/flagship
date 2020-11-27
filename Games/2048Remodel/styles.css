@@ -1,0 +1,284 @@
+html{
+    text-align: center;
+    margin: auto;
+}
+
+.container p, h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 420px;
+    height: 420px;
+    background-color: rgb(127, 246, 255);
+    margin:auto;
+    justify-content: center;
+}
+
+#scoreCounter {
+    color: lightblue;
+}
+
+.reset {
+    background-color: lightgrey; 
+    border: 2px solid #008CBA;
+    color: black;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 12px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+.reset:hover {
+    background-color: #008CBA;
+}
+
+.back {
+    background-color: lightgrey; 
+    border: 2px solid palevioletred;
+    color: black;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 12px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+.back:hover {
+    background-color: palevioletred;
+}
+
+#zero {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 4px solid black;
+    border-bottom: 2px solid black;
+    border-left: 4px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#one {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 4px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#two {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 4px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#three {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 4px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 4px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#four {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 4px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#five {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#six {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#seven {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 4px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#eight {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 4px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#nine {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#ten {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#eleven {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 4px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#twelve {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 4px solid black;
+    border-left: 4px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#thirteen {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 4px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#time {
+    text-align: center;
+    font-size: 30px;
+}
+
+#fourteen {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 4px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#fifteen {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-top: 2px solid black;
+    border-bottom: 4px solid black;
+    border-left: 2px solid black;
+    border-right: 4px solid black;
+    text-align: center;
+    font-size: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+html {
+    background-image: url('Static.jpg');
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: whitesmoke;
+}
+h2{
+    text-align: center;
+}
+p{
+    text-align: center;
+    color: rgb(148, 148, 148);
+}

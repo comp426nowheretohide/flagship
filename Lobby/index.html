@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Lobby
+    </title>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="hero is-size-1">Lobby</h1>
+        <h2 class="hero is-size-3 mb-3">Enter a game ID of an existing game or create a new one!</h2>
+
+        <section class = "container">
+            <div class="columns is-centered">
+                <div class="column is-half">
+                    <h1 class="title has-text-white">Join Game</h1>
+                    <form id="join-form">
+                        <div class="field">
+                            <label class="label has-text-white">Name</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Username" name="username" id="joinName">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label has-text-white">Game ID</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="The game ID given to you by a friend, family member, etc. to join that game." name="gameid" id="joinID">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <input class="button is-warning" type="submit"/>
+                            </div>
+                        </div>
+                    </form>
+                    <p class = "is-size-4 has-text-danger" id = "joinError"></p>
+                </div>
+
+                <div class="column is-half">
+                    <h1 class="title has-text-white">Create a Game</h1>
+
+                    <form id="create-form">
+                        <div class="field">
+                            <label class="label has-text-white">Name</label>
+                            <input class="input" type="text" placeholder="Username" name="username" id="createName">
+                        </div>
+                        <div class="field">
+                            <label class="label has-text-white">Choose Game ID (must be 6 characters or less)</label>
+                            <input class="input" type="text" placeholder="Ex. XX6YT" name="gameID" id="createID" maxlength="6">
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <input class="button is-warning" type="submit"/>
+                            </div>
+                        </div>
+                    </form>
+                    <p class = "is-size-4 has-text-danger" id = "createError"></p>
+                </div>
+            </div>
+            </div>
+            </section>
+
+    </div>
+    <script src="lobby.js"></script>
+</body>
+
+</html>

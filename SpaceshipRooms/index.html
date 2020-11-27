@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Shrikhand&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <title>Choose A Room</title>
+        
+    </head>
+
+    <style>
+        html{
+            background-image: url('Starfield.png');
+            background-size: cover;
+        }
+        #backgroundbox{
+            height: 700px;
+            width: 900px;
+            margin: 100px;
+        }
+        #display{
+            height: 660px;
+        }
+
+        #time {
+            text-align: center;
+            font-size: 50px;
+            color: whitesmoke;
+        }
+    </style>
+
+    <body>
+        <section class="hero is-fullheight">
+            <div class="container">
+                <div id="time">29</div>
+                <div class="has-background-grey box" id= "backgroundbox">
+                    <div class="has-background-grey-light box" id="display"></div>
+                </div>
+            </div>
+        </section>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="rooms.js"></script>
+    </body>
+
+</html>

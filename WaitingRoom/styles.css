@@ -1,0 +1,15 @@
+html {
+    background-image: url('Static.jpg');
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: whitesmoke;
+}
+h2, p{
+    text-align: center;
+}
+h3 {
+    text-align: center;
+}
