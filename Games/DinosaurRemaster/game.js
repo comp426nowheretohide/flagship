@@ -4,7 +4,7 @@ const asteroids = $('#asteroids');
 let timeInterval = 1000;
 let speed = 950;
 
-let lives = 3;
+let lives = 5;
 
 let time = 59;
 
@@ -63,7 +63,7 @@ const generateAsteroid = (num)=>{
 let generateAsteroids = () =>{
     asteroids.empty();
     let numAsteroids = Math.random();
-    if(numAsteroids > .7){
+    if(numAsteroids > .75){
         generateAsteroid(2);
     }
     else{

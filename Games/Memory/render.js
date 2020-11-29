@@ -211,8 +211,10 @@ export const loadIntoDOM = function () {
                     loadImages();
                     showMatched();
                     //Send successful result to backend
+                    if(!taskCompleted){
+                        sendTaskResult(currUser, gameID, 1);
+                    }
                     taskCompleted = true;
-                    sendTaskResult(currUser, gameID, 1);
                 }
             }, 3000)
         }

@@ -164,8 +164,10 @@ function hasWon() {
         $('p').addClass('has-text-success');
         $('#score').addClass('has-text-success');
         //send successful result to backend
+        if(!taskCompleted){
+            sendTaskResult(currUser, gameID, 1);
+        }
         taskCompleted = true;
-        sendTaskResult(currUser, gameID, 1);
     }
 }
 

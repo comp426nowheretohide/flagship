@@ -491,8 +491,10 @@ function showResults(questions, quiz, result){
             result.style.color = 'green';
             result.innerHTML = "System calibrated correctly! Task completed!";
             //send success to backend
+            if(!taskCompleted){
+                sendTaskResult(currUser, gameID, 1);
+            }
             taskCompleted = true;
-            sendTaskResult(currUser, gameID, 1);
         }
     }
 }
